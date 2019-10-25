@@ -17,10 +17,12 @@ int main(void)
 
 	uint8_t state = OFF; // Initial state
 
+	uint16_t	run = 10000;
+
 	PORTA.DIRSET = 0b00010000; // Binary 4: Set directory PA4
 
 	
-    while (1) 
+    while (run!=0) 
     {
 		if (state)
 		{
@@ -32,7 +34,8 @@ int main(void)
 			PORTA.OUTSET = 0b00010000; // set bit porta.4
 			state = ON;
 		}
-		_delay_ms(26); // milliseconds delay
+		_delay_us(13); // microseconds delay
+		run--;
     }
 }
 

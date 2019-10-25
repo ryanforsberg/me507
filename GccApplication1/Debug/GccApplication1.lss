@@ -3,29 +3,29 @@ GccApplication1.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000246  00000000  00000000  00000054  2**1
+  0 .text         0000024e  00000000  00000000  00000054  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00802000  00802000  0000029a  2**0
+  1 .data         00000000  00802000  00802000  000002a2  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000030  00000000  00000000  0000029a  2**0
+  2 .comment      00000030  00000000  00000000  000002a2  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000002cc  2**2
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000002d4  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000020  00000000  00000000  0000030c  2**0
+  4 .debug_aranges 00000020  00000000  00000000  00000314  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00003826  00000000  00000000  0000032c  2**0
+  5 .debug_info   00003842  00000000  00000000  00000334  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000033aa  00000000  00000000  00003b52  2**0
+  6 .debug_abbrev 000033ad  00000000  00000000  00003b76  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000545  00000000  00000000  00006efc  2**0
+  7 .debug_line   00000554  00000000  00000000  00006f23  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000024  00000000  00000000  00007444  2**2
+  8 .debug_frame  00000024  00000000  00000000  00007478  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00002672  00000000  00000000  00007468  2**0
+  9 .debug_str    0000267b  00000000  00000000  0000749c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000042  00000000  00000000  00009ada  2**0
+ 10 .debug_loc    000000b3  00000000  00000000  00009b17  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000010  00000000  00000000  00009b1c  2**0
+ 11 .debug_ranges 00000010  00000000  00000000  00009bca  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -171,73 +171,89 @@ Disassembly of section .text:
  208:	1a be       	out	0x3a, r1	; 58
  20a:	1b be       	out	0x3b, r1	; 59
  20c:	0e 94 0c 01 	call	0x218	; 0x218 <main>
- 210:	0c 94 21 01 	jmp	0x242	; 0x242 <_exit>
+ 210:	0c 94 25 01 	jmp	0x24a	; 0x24a <_exit>
 
 00000214 <__bad_interrupt>:
  214:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000218 <main>:
-	uint8_t ON = 1;
-	uint8_t OFF = 0;
 
 	uint8_t state = OFF; // Initial state
+
+	uint16_t	run = 10000;
 
 	PORTA.DIRSET = 0b00010000; // Binary 4: Set directory PA4
  218:	80 e1       	ldi	r24, 0x10	; 16
  21a:	80 93 01 06 	sts	0x0601, r24	; 0x800601 <__TEXT_REGION_LENGTH__+0x700601>
+ 21e:	80 e1       	ldi	r24, 0x10	; 16
+ 220:	97 e2       	ldi	r25, 0x27	; 39
 int main(void)
 {
 	uint8_t ON = 1;
 	uint8_t OFF = 0;
 
 	uint8_t state = OFF; // Initial state
- 21e:	80 e0       	ldi	r24, 0x00	; 0
+ 222:	20 e0       	ldi	r18, 0x00	; 0
 			PORTA.OUTCLR = 0b00010000; // clear bit porta.4
 			state = OFF;
 		}
 		else
 		{
 			PORTA.OUTSET = 0b00010000; // set bit porta.4
- 220:	e0 e0       	ldi	r30, 0x00	; 0
- 222:	f6 e0       	ldi	r31, 0x06	; 6
- 224:	90 e1       	ldi	r25, 0x10	; 16
+ 224:	e0 e0       	ldi	r30, 0x00	; 0
+ 226:	f6 e0       	ldi	r31, 0x06	; 6
+ 228:	30 e1       	ldi	r19, 0x10	; 16
 	PORTA.DIRSET = 0b00010000; // Binary 4: Set directory PA4
 
 	
-    while (1) 
+    while (run!=0) 
     {
 		if (state)
- 226:	88 23       	and	r24, r24
- 228:	19 f0       	breq	.+6      	; 0x230 <main+0x18>
+ 22a:	22 23       	and	r18, r18
+ 22c:	19 f0       	breq	.+6      	; 0x234 <main+0x1c>
 		{
 			PORTA.OUTCLR = 0b00010000; // clear bit porta.4
- 22a:	96 83       	std	Z+6, r25	; 0x06
+ 22e:	36 83       	std	Z+6, r19	; 0x06
 			state = OFF;
- 22c:	80 e0       	ldi	r24, 0x00	; 0
- 22e:	02 c0       	rjmp	.+4      	; 0x234 <main+0x1c>
+ 230:	20 e0       	ldi	r18, 0x00	; 0
+ 232:	02 c0       	rjmp	.+4      	; 0x238 <main+0x20>
 		}
 		else
 		{
 			PORTA.OUTSET = 0b00010000; // set bit porta.4
- 230:	95 83       	std	Z+5, r25	; 0x05
+ 234:	35 83       	std	Z+5, r19	; 0x05
 			state = ON;
- 232:	81 e0       	ldi	r24, 0x01	; 1
+ 236:	21 e0       	ldi	r18, 0x01	; 1
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 234:	a7 ec       	ldi	r26, 0xC7	; 199
- 236:	b2 e3       	ldi	r27, 0x32	; 50
- 238:	11 97       	sbiw	r26, 0x01	; 1
- 23a:	f1 f7       	brne	.-4      	; 0x238 <main+0x20>
- 23c:	00 c0       	rjmp	.+0      	; 0x23e <main+0x26>
- 23e:	00 00       	nop
- 240:	f2 cf       	rjmp	.-28     	; 0x226 <main+0xe>
+ 238:	48 e0       	ldi	r20, 0x08	; 8
+ 23a:	4a 95       	dec	r20
+ 23c:	f1 f7       	brne	.-4      	; 0x23a <main+0x22>
+ 23e:	00 c0       	rjmp	.+0      	; 0x240 <main+0x28>
+ 240:	01 97       	sbiw	r24, 0x01	; 1
+	uint16_t	run = 10000;
 
-00000242 <_exit>:
- 242:	f8 94       	cli
+	PORTA.DIRSET = 0b00010000; // Binary 4: Set directory PA4
 
-00000244 <__stop_program>:
- 244:	ff cf       	rjmp	.-2      	; 0x244 <__stop_program>
+	
+    while (run!=0) 
+ 242:	99 f7       	brne	.-26     	; 0x22a <main+0x12>
+			state = ON;
+		}
+		_delay_us(13); // microseconds delay
+		run--;
+    }
+}
+ 244:	80 e0       	ldi	r24, 0x00	; 0
+ 246:	90 e0       	ldi	r25, 0x00	; 0
+ 248:	08 95       	ret
+
+0000024a <_exit>:
+ 24a:	f8 94       	cli
+
+0000024c <__stop_program>:
+ 24c:	ff cf       	rjmp	.-2      	; 0x24c <__stop_program>
