@@ -12,10 +12,10 @@
 
 // Custom stuff
 // Define PWM Frequency
-#define F_PWM 38000U
+#define F_PWM 38000UL
 
-#define T_ON 0.120*F_PWM*2
-#define T_TOT 0.5*F_PWM*2
+#define T_ON 0.120*F_PWM*2UL
+#define T_TOT 0.5*F_PWM*2UL
 
 #define ON 1
 #define OFF 0
@@ -32,16 +32,18 @@ int main(void)
 	
     while (1) 
     {
-		_delay_us( (1/F_PWM) *1000 *1000 /2) //define delay by PWM frequency.
 		i++;
-		if (p == 0 && i < T_ON)
+		if (p == 0 && i < T_ON) // If power is off and increment is within the time range of when it should be on
 		{
-			p = 1;
+			p = 1;	// Raise power flag
 			PORTA.OUTSET = 1 << 5; //turn on PA5
+			_delay_us( (1/F_PWM) *1000 *1000 /2); //define delay by PWM frequency. Delay
 		}
-		else
+		else  
 		{
 			PORTA.OUTCLR = 1 << 5; //turn off PA5
+			p=0;
+			_delay_us( (1/F_PWM) *1000 *1000 /2); //define delay by PWM frequency. Delay
 		}
 		
 		if (i > T_TOT)
@@ -50,4 +52,3 @@ int main(void)
 		}
     }
 }
-
