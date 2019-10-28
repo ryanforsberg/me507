@@ -3,29 +3,29 @@ GccApplication1.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         0000024e  00000000  00000000  00000054  2**1
+  0 .text         0000035c  00000000  00000000  00000054  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00802000  00802000  000002a2  2**0
+  1 .data         00000000  00802000  00802000  000003b0  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000030  00000000  00000000  000002a2  2**0
+  2 .comment      00000030  00000000  00000000  000003b0  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000002d4  2**2
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000003e0  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000020  00000000  00000000  00000314  2**0
+  4 .debug_aranges 00000020  00000000  00000000  00000420  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00003842  00000000  00000000  00000334  2**0
+  5 .debug_info   000037e3  00000000  00000000  00000440  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000033ad  00000000  00000000  00003b76  2**0
+  6 .debug_abbrev 0000335d  00000000  00000000  00003c23  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000554  00000000  00000000  00006f23  2**0
+  7 .debug_line   00000566  00000000  00000000  00006f80  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000024  00000000  00000000  00007478  2**2
+  8 .debug_frame  00000024  00000000  00000000  000074e8  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0000267b  00000000  00000000  0000749c  2**0
+  9 .debug_str    00002665  00000000  00000000  0000750c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000000b3  00000000  00000000  00009b17  2**0
+ 10 .debug_loc    00000072  00000000  00000000  00009b71  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000010  00000000  00000000  00009bca  2**0
+ 11 .debug_ranges 00000010  00000000  00000000  00009be3  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -171,89 +171,233 @@ Disassembly of section .text:
  208:	1a be       	out	0x3a, r1	; 58
  20a:	1b be       	out	0x3b, r1	; 59
  20c:	0e 94 0c 01 	call	0x218	; 0x218 <main>
- 210:	0c 94 25 01 	jmp	0x24a	; 0x24a <_exit>
+ 210:	0c 94 ac 01 	jmp	0x358	; 0x358 <_exit>
 
 00000214 <__bad_interrupt>:
  214:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000218 <main>:
 
-	uint8_t state = OFF; // Initial state
 
-	uint16_t	run = 10000;
-
-	PORTA.DIRSET = 0b00010000; // Binary 4: Set directory PA4
- 218:	80 e1       	ldi	r24, 0x10	; 16
- 21a:	80 93 01 06 	sts	0x0601, r24	; 0x800601 <__TEXT_REGION_LENGTH__+0x700601>
- 21e:	80 e1       	ldi	r24, 0x10	; 16
- 220:	97 e2       	ldi	r25, 0x27	; 39
+	uint16_t i = 0; //Increment
+	uint8_t p = 0; //Pin power
+	
+	PORTA.DIRSET = 1 << 5; // Set direction PA5
+ 218:	e0 e0       	ldi	r30, 0x00	; 0
+ 21a:	f6 e0       	ldi	r31, 0x06	; 6
+ 21c:	80 e2       	ldi	r24, 0x20	; 32
+ 21e:	81 83       	std	Z+1, r24	; 0x01
+	PORTA.OUTSET = 1 << 5; // Turn off PA5
+ 220:	85 83       	std	Z+5, r24	; 0x05
 int main(void)
 {
-	uint8_t ON = 1;
-	uint8_t OFF = 0;
 
-	uint8_t state = OFF; // Initial state
- 222:	20 e0       	ldi	r18, 0x00	; 0
-			PORTA.OUTCLR = 0b00010000; // clear bit porta.4
-			state = OFF;
+
+	uint16_t i = 0; //Increment
+	uint8_t p = 0; //Pin power
+ 222:	10 e0       	ldi	r17, 0x00	; 0
+
+int main(void)
+{
+
+
+	uint16_t i = 0; //Increment
+ 224:	c0 e0       	ldi	r28, 0x00	; 0
+ 226:	d0 e0       	ldi	r29, 0x00	; 0
+			PORTA.OUTSET = 1 << 5; //turn on PA5
+			_delay_us( (1/F_PWM) *1000 *1000 /2); //define delay by PWM frequency. Delay
 		}
-		else
+		else  
 		{
-			PORTA.OUTSET = 0b00010000; // set bit porta.4
- 224:	e0 e0       	ldi	r30, 0x00	; 0
- 226:	f6 e0       	ldi	r31, 0x06	; 6
- 228:	30 e1       	ldi	r19, 0x10	; 16
-	PORTA.DIRSET = 0b00010000; // Binary 4: Set directory PA4
-
+			PORTA.OUTCLR = 1 << 5; //turn off PA5
+ 228:	0f 2e       	mov	r0, r31
+ 22a:	e1 2c       	mov	r14, r1
+ 22c:	f6 e0       	ldi	r31, 0x06	; 6
+ 22e:	ff 2e       	mov	r15, r31
+ 230:	f0 2d       	mov	r31, r0
+ 232:	00 e2       	ldi	r16, 0x20	; 32
+	PORTA.DIRSET = 1 << 5; // Set direction PA5
+	PORTA.OUTSET = 1 << 5; // Turn off PA5
 	
-    while (run!=0) 
+    while (1) 
     {
-		if (state)
- 22a:	22 23       	and	r18, r18
- 22c:	19 f0       	breq	.+6      	; 0x234 <main+0x1c>
+		i++;
+ 234:	21 96       	adiw	r28, 0x01	; 1
+		if (p == 0 && i < T_ON) // If power is off and increment is within the time range of when it should be on
+ 236:	11 11       	cpse	r17, r1
+ 238:	11 c0       	rjmp	.+34     	; 0x25c <main+0x44>
+ 23a:	be 01       	movw	r22, r28
+ 23c:	80 e0       	ldi	r24, 0x00	; 0
+ 23e:	90 e0       	ldi	r25, 0x00	; 0
+ 240:	0e 94 46 01 	call	0x28c	; 0x28c <__floatunsisf>
+ 244:	20 e0       	ldi	r18, 0x00	; 0
+ 246:	30 e0       	ldi	r19, 0x00	; 0
+ 248:	4e eb       	ldi	r20, 0xBE	; 190
+ 24a:	53 e4       	ldi	r21, 0x43	; 67
+ 24c:	0e 94 41 01 	call	0x282	; 0x282 <__cmpsf2>
+ 250:	88 23       	and	r24, r24
+ 252:	24 f4       	brge	.+8      	; 0x25c <main+0x44>
 		{
-			PORTA.OUTCLR = 0b00010000; // clear bit porta.4
- 22e:	36 83       	std	Z+6, r19	; 0x06
-			state = OFF;
- 230:	20 e0       	ldi	r18, 0x00	; 0
- 232:	02 c0       	rjmp	.+4      	; 0x238 <main+0x20>
-		}
-		else
+			p = 1;	// Raise power flag
+			PORTA.OUTSET = 1 << 5; //turn on PA5
+ 254:	f7 01       	movw	r30, r14
+ 256:	05 83       	std	Z+5, r16	; 0x05
+    while (1) 
+    {
+		i++;
+		if (p == 0 && i < T_ON) // If power is off and increment is within the time range of when it should be on
 		{
-			PORTA.OUTSET = 0b00010000; // set bit porta.4
- 234:	35 83       	std	Z+5, r19	; 0x05
-			state = ON;
- 236:	21 e0       	ldi	r18, 0x01	; 1
-	#else
-		//round up by default
-		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
-	#endif
-
-	__builtin_avr_delay_cycles(__ticks_dc);
- 238:	48 e0       	ldi	r20, 0x08	; 8
- 23a:	4a 95       	dec	r20
- 23c:	f1 f7       	brne	.-4      	; 0x23a <main+0x22>
- 23e:	00 c0       	rjmp	.+0      	; 0x240 <main+0x28>
- 240:	01 97       	sbiw	r24, 0x01	; 1
-	uint16_t	run = 10000;
-
-	PORTA.DIRSET = 0b00010000; // Binary 4: Set directory PA4
-
-	
-    while (run!=0) 
- 242:	99 f7       	brne	.-26     	; 0x22a <main+0x12>
-			state = ON;
+			p = 1;	// Raise power flag
+ 258:	11 e0       	ldi	r17, 0x01	; 1
+ 25a:	03 c0       	rjmp	.+6      	; 0x262 <main+0x4a>
+			PORTA.OUTSET = 1 << 5; //turn on PA5
+			_delay_us( (1/F_PWM) *1000 *1000 /2); //define delay by PWM frequency. Delay
 		}
-		_delay_us(13); // microseconds delay
-		run--;
-    }
-}
- 244:	80 e0       	ldi	r24, 0x00	; 0
- 246:	90 e0       	ldi	r25, 0x00	; 0
- 248:	08 95       	ret
+		else  
+		{
+			PORTA.OUTCLR = 1 << 5; //turn off PA5
+ 25c:	f7 01       	movw	r30, r14
+ 25e:	06 83       	std	Z+6, r16	; 0x06
+			p=0;
+ 260:	10 e0       	ldi	r17, 0x00	; 0
+			_delay_us( (1/F_PWM) *1000 *1000 /2); //define delay by PWM frequency. Delay
+		}
+		
+		if (i > T_TOT)
+ 262:	be 01       	movw	r22, r28
+ 264:	80 e0       	ldi	r24, 0x00	; 0
+ 266:	90 e0       	ldi	r25, 0x00	; 0
+ 268:	0e 94 46 01 	call	0x28c	; 0x28c <__floatunsisf>
+ 26c:	20 e0       	ldi	r18, 0x00	; 0
+ 26e:	30 e7       	ldi	r19, 0x70	; 112
+ 270:	44 e1       	ldi	r20, 0x14	; 20
+ 272:	57 e4       	ldi	r21, 0x47	; 71
+ 274:	0e 94 a7 01 	call	0x34e	; 0x34e <__gesf2>
+ 278:	18 16       	cp	r1, r24
+ 27a:	e4 f6       	brge	.-72     	; 0x234 <main+0x1c>
+		{
+			i = 0;
+ 27c:	c0 e0       	ldi	r28, 0x00	; 0
+ 27e:	d0 e0       	ldi	r29, 0x00	; 0
+ 280:	d9 cf       	rjmp	.-78     	; 0x234 <main+0x1c>
 
-0000024a <_exit>:
- 24a:	f8 94       	cli
+00000282 <__cmpsf2>:
+ 282:	0e 94 83 01 	call	0x306	; 0x306 <__fp_cmp>
+ 286:	08 f4       	brcc	.+2      	; 0x28a <__cmpsf2+0x8>
+ 288:	81 e0       	ldi	r24, 0x01	; 1
+ 28a:	08 95       	ret
 
-0000024c <__stop_program>:
- 24c:	ff cf       	rjmp	.-2      	; 0x24c <__stop_program>
+0000028c <__floatunsisf>:
+ 28c:	e8 94       	clt
+ 28e:	09 c0       	rjmp	.+18     	; 0x2a2 <__floatsisf+0x12>
+
+00000290 <__floatsisf>:
+ 290:	97 fb       	bst	r25, 7
+ 292:	3e f4       	brtc	.+14     	; 0x2a2 <__floatsisf+0x12>
+ 294:	90 95       	com	r25
+ 296:	80 95       	com	r24
+ 298:	70 95       	com	r23
+ 29a:	61 95       	neg	r22
+ 29c:	7f 4f       	sbci	r23, 0xFF	; 255
+ 29e:	8f 4f       	sbci	r24, 0xFF	; 255
+ 2a0:	9f 4f       	sbci	r25, 0xFF	; 255
+ 2a2:	99 23       	and	r25, r25
+ 2a4:	a9 f0       	breq	.+42     	; 0x2d0 <__floatsisf+0x40>
+ 2a6:	f9 2f       	mov	r31, r25
+ 2a8:	96 e9       	ldi	r25, 0x96	; 150
+ 2aa:	bb 27       	eor	r27, r27
+ 2ac:	93 95       	inc	r25
+ 2ae:	f6 95       	lsr	r31
+ 2b0:	87 95       	ror	r24
+ 2b2:	77 95       	ror	r23
+ 2b4:	67 95       	ror	r22
+ 2b6:	b7 95       	ror	r27
+ 2b8:	f1 11       	cpse	r31, r1
+ 2ba:	f8 cf       	rjmp	.-16     	; 0x2ac <__floatsisf+0x1c>
+ 2bc:	fa f4       	brpl	.+62     	; 0x2fc <__floatsisf+0x6c>
+ 2be:	bb 0f       	add	r27, r27
+ 2c0:	11 f4       	brne	.+4      	; 0x2c6 <__floatsisf+0x36>
+ 2c2:	60 ff       	sbrs	r22, 0
+ 2c4:	1b c0       	rjmp	.+54     	; 0x2fc <__floatsisf+0x6c>
+ 2c6:	6f 5f       	subi	r22, 0xFF	; 255
+ 2c8:	7f 4f       	sbci	r23, 0xFF	; 255
+ 2ca:	8f 4f       	sbci	r24, 0xFF	; 255
+ 2cc:	9f 4f       	sbci	r25, 0xFF	; 255
+ 2ce:	16 c0       	rjmp	.+44     	; 0x2fc <__floatsisf+0x6c>
+ 2d0:	88 23       	and	r24, r24
+ 2d2:	11 f0       	breq	.+4      	; 0x2d8 <__floatsisf+0x48>
+ 2d4:	96 e9       	ldi	r25, 0x96	; 150
+ 2d6:	11 c0       	rjmp	.+34     	; 0x2fa <__floatsisf+0x6a>
+ 2d8:	77 23       	and	r23, r23
+ 2da:	21 f0       	breq	.+8      	; 0x2e4 <__floatsisf+0x54>
+ 2dc:	9e e8       	ldi	r25, 0x8E	; 142
+ 2de:	87 2f       	mov	r24, r23
+ 2e0:	76 2f       	mov	r23, r22
+ 2e2:	05 c0       	rjmp	.+10     	; 0x2ee <__floatsisf+0x5e>
+ 2e4:	66 23       	and	r22, r22
+ 2e6:	71 f0       	breq	.+28     	; 0x304 <__floatsisf+0x74>
+ 2e8:	96 e8       	ldi	r25, 0x86	; 134
+ 2ea:	86 2f       	mov	r24, r22
+ 2ec:	70 e0       	ldi	r23, 0x00	; 0
+ 2ee:	60 e0       	ldi	r22, 0x00	; 0
+ 2f0:	2a f0       	brmi	.+10     	; 0x2fc <__floatsisf+0x6c>
+ 2f2:	9a 95       	dec	r25
+ 2f4:	66 0f       	add	r22, r22
+ 2f6:	77 1f       	adc	r23, r23
+ 2f8:	88 1f       	adc	r24, r24
+ 2fa:	da f7       	brpl	.-10     	; 0x2f2 <__floatsisf+0x62>
+ 2fc:	88 0f       	add	r24, r24
+ 2fe:	96 95       	lsr	r25
+ 300:	87 95       	ror	r24
+ 302:	97 f9       	bld	r25, 7
+ 304:	08 95       	ret
+
+00000306 <__fp_cmp>:
+ 306:	99 0f       	add	r25, r25
+ 308:	00 08       	sbc	r0, r0
+ 30a:	55 0f       	add	r21, r21
+ 30c:	aa 0b       	sbc	r26, r26
+ 30e:	e0 e8       	ldi	r30, 0x80	; 128
+ 310:	fe ef       	ldi	r31, 0xFE	; 254
+ 312:	16 16       	cp	r1, r22
+ 314:	17 06       	cpc	r1, r23
+ 316:	e8 07       	cpc	r30, r24
+ 318:	f9 07       	cpc	r31, r25
+ 31a:	c0 f0       	brcs	.+48     	; 0x34c <__fp_cmp+0x46>
+ 31c:	12 16       	cp	r1, r18
+ 31e:	13 06       	cpc	r1, r19
+ 320:	e4 07       	cpc	r30, r20
+ 322:	f5 07       	cpc	r31, r21
+ 324:	98 f0       	brcs	.+38     	; 0x34c <__fp_cmp+0x46>
+ 326:	62 1b       	sub	r22, r18
+ 328:	73 0b       	sbc	r23, r19
+ 32a:	84 0b       	sbc	r24, r20
+ 32c:	95 0b       	sbc	r25, r21
+ 32e:	39 f4       	brne	.+14     	; 0x33e <__fp_cmp+0x38>
+ 330:	0a 26       	eor	r0, r26
+ 332:	61 f0       	breq	.+24     	; 0x34c <__fp_cmp+0x46>
+ 334:	23 2b       	or	r18, r19
+ 336:	24 2b       	or	r18, r20
+ 338:	25 2b       	or	r18, r21
+ 33a:	21 f4       	brne	.+8      	; 0x344 <__fp_cmp+0x3e>
+ 33c:	08 95       	ret
+ 33e:	0a 26       	eor	r0, r26
+ 340:	09 f4       	brne	.+2      	; 0x344 <__fp_cmp+0x3e>
+ 342:	a1 40       	sbci	r26, 0x01	; 1
+ 344:	a6 95       	lsr	r26
+ 346:	8f ef       	ldi	r24, 0xFF	; 255
+ 348:	81 1d       	adc	r24, r1
+ 34a:	81 1d       	adc	r24, r1
+ 34c:	08 95       	ret
+
+0000034e <__gesf2>:
+ 34e:	0e 94 83 01 	call	0x306	; 0x306 <__fp_cmp>
+ 352:	08 f4       	brcc	.+2      	; 0x356 <__gesf2+0x8>
+ 354:	8f ef       	ldi	r24, 0xFF	; 255
+ 356:	08 95       	ret
+
+00000358 <_exit>:
+ 358:	f8 94       	cli
+
+0000035a <__stop_program>:
+ 35a:	ff cf       	rjmp	.-2      	; 0x35a <__stop_program>

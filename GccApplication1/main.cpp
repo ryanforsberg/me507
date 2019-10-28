@@ -7,35 +7,48 @@
 
 #include <avr/io.h>
 
-#define F_CPU 2000000UL // Unsigned long 32 bit
+#define F_CPU 2000000UL // Unsigned long 32 bit - define CPU frequency
 #include <util/delay.h> // Remove this once switching over to Real time operating system
+
+// Custom stuff
+// Define PWM Frequency
+#define F_PWM 38000UL	// Frequency of PWM signal, Hertz
+
+#define T_ON 0.005*F_PWM*2UL  // Duration of on signal, seconds
+#define T_TOT 0.5*F_PWM*2UL   // Total time of a full signal cycle, seconds
+
+#define ON 1
+#define OFF 0
 
 int main(void)
 {
-	uint8_t ON = 1;
-	uint8_t OFF = 0;
 
-	uint8_t state = OFF; // Initial state
 
-	uint16_t	run = 10000;
-
-	PORTA.DIRSET = 0b00010000; // Binary 4: Set directory PA4
-
+	uint16_t i = 0; //Increment
+	uint8_t p = 0; //Pin power
 	
-    while (run!=0) 
+	PORTA.DIRSET = 1 << 5; // Set direction PA5
+	PORTA.OUTSET = 1 << 5; // Turn off PA5
+	
+    while (1) 
     {
-		if (state)
+		i++;
+		if (p == 0 && i < T_ON) // If power is off and increment is within the time range of when it should be on
 		{
-			PORTA.OUTCLR = 0b00010000; // clear bit porta.4
-			state = OFF;
+			p = 1;	// Raise power flag
+			PORTA.OUTSET = 1 << 5; //turn on PA5
+			_delay_us( (1/F_PWM) *1000 *1000 /2); //define delay by PWM frequency. Delay
 		}
-		else
+		else  
 		{
-			PORTA.OUTSET = 0b00010000; // set bit porta.4
-			state = ON;
+			PORTA.OUTCLR = 1 << 5; //turn off PA5
+			p=0;
+			_delay_us( (1/F_PWM) *1000 *1000 /2); //define delay by PWM frequency. Delay
 		}
-		_delay_us(13); // microseconds delay
-		run--;
+		
+		if (i > T_TOT)
+		{
+			i = 0;
+		}
     }
 }
-
