@@ -2,7 +2,7 @@
 Cal Poly ME 507 Sumo Bot Project
 
 Board is Missing:
-* Headers/Connectors for edge sensors
+* Headers/Connectors for edge sensors - use JST ZH connectors
 * Opponent painting potential
 * Breakout of extra pins
 * Mounting holes
