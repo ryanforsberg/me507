@@ -9,6 +9,7 @@ Board is Missing:
 
 Other todos:
 * Potentially remap inputs to make routing simpler
+* Download and use Oshpark design rules to be used for DRC
 * Confirm pad sizes with Charlie, probably need to be redone for sufficient room for solder... (_great_).
 * ???
 * Profit
