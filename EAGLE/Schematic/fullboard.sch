@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.5.1">
+<eagle version="9.4.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -14532,7 +14532,7 @@ Source: &lt;a href="http://aosmd.com/res/data_sheets/AOD4189.pdf"&gt; Datasheet 
 <attribute name="VR" value="25V"/>
 </part>
 <part name="FRAME4" library="ME507" deviceset="TITLEBLOCK_LET_L" device=""/>
-<part name="U$16" library="SumBot" deviceset="RLB0914-100KL" device="" package3d_urn="urn:adsk.eagle:package:14873705/1">
+<part name="L1" library="SumBot" deviceset="RLB0914-100KL" device="" package3d_urn="urn:adsk.eagle:package:14873705/1">
 <attribute name="RATING" value="10uH"/>
 </part>
 <part name="C38" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="10uF">
@@ -14548,7 +14548,7 @@ Source: &lt;a href="http://aosmd.com/res/data_sheets/AOD4189.pdf"&gt; Datasheet 
 <attribute name="VR" value="10V"/>
 </part>
 <part name="P+12" library="ME507" deviceset="AVCC" device=""/>
-<part name="U$17" library="blm21" deviceset="BLM21PG221SN1D" device="">
+<part name="L2" library="blm21" deviceset="BLM21PG221SN1D" device="">
 <attribute name="RATING" value="220Ω @ 100MHz"/>
 </part>
 <part name="C41" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="27pF">
@@ -14628,12 +14628,12 @@ Source: &lt;a href="http://aosmd.com/res/data_sheets/AOD4189.pdf"&gt; Datasheet 
 <part name="GND35" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="FRAME5" library="ME507" deviceset="TITLEBLOCK_LET_L" device=""/>
-<part name="CN4" library="jst" deviceset="S4B" device="-ZR"/>
-<part name="CN5" library="jst" deviceset="S4B" device="-ZR"/>
-<part name="CN6" library="jst" deviceset="S4B" device="-ZR"/>
-<part name="CN7" library="jst" deviceset="S4B" device="-ZR"/>
-<part name="CN8" library="jst" deviceset="S4B" device="-ZR"/>
-<part name="CN9" library="jst" deviceset="S4B" device="-ZR"/>
+<part name="E_A" library="jst" deviceset="S4B" device="-ZR"/>
+<part name="E_B" library="jst" deviceset="S4B" device="-ZR"/>
+<part name="E_C" library="jst" deviceset="S4B" device="-ZR"/>
+<part name="E_D" library="jst" deviceset="S4B" device="-ZR"/>
+<part name="E_E" library="jst" deviceset="S4B" device="-ZR"/>
+<part name="E_F" library="jst" deviceset="S4B" device="-ZR"/>
 <part name="GND36" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND37" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND38" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -14668,6 +14668,7 @@ Source: &lt;a href="http://aosmd.com/res/data_sheets/AOD4189.pdf"&gt; Datasheet 
 <part name="U$28" library="ME507" deviceset="NC" device=""/>
 <part name="U$29" library="ME507" deviceset="NC" device=""/>
 <part name="U$30" library="ME507" deviceset="NC" device=""/>
+<part name="BATT" library="ME507" deviceset="SCREWTERM_2P" device="_508"/>
 </parts>
 <sheets>
 <sheet>
@@ -16831,8 +16832,8 @@ Source: &lt;a href="http://aosmd.com/res/data_sheets/AOD4189.pdf"&gt; Datasheet 
 <instance part="IC6" gate="G$1" x="114.3" y="149.86" smashed="yes">
 <attribute name="NAME" x="111.76" y="157.48" size="1.778" layer="95"/>
 </instance>
-<instance part="P+6" gate="1" x="53.34" y="180.34" smashed="yes">
-<attribute name="VALUE" x="50.8" y="175.26" size="1.778" layer="96" rot="R90"/>
+<instance part="P+6" gate="1" x="68.58" y="182.88" smashed="yes">
+<attribute name="VALUE" x="66.04" y="177.8" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="+3V6" gate="G$1" x="157.48" y="160.02" smashed="yes">
 <attribute name="VALUE" x="154.94" y="154.94" size="1.778" layer="96" rot="R90"/>
@@ -16863,7 +16864,7 @@ Source: &lt;a href="http://aosmd.com/res/data_sheets/AOD4189.pdf"&gt; Datasheet 
 <attribute name="SHEET" x="189.23" y="6.35" size="2.54" layer="94"/>
 <attribute name="DRAWING_NAME" x="240.665" y="3.81" size="2.54" layer="94" align="bottom-right"/>
 </instance>
-<instance part="U$16" gate="G$1" x="142.24" y="152.4" smashed="yes">
+<instance part="L1" gate="G$1" x="142.24" y="152.4" smashed="yes">
 <attribute name="NAME" x="142.24" y="154.94" size="1.778" layer="95"/>
 <attribute name="RATING" x="142.24" y="149.86" size="1.778" layer="96"/>
 </instance>
@@ -16884,7 +16885,7 @@ Source: &lt;a href="http://aosmd.com/res/data_sheets/AOD4189.pdf"&gt; Datasheet 
 <instance part="P+12" gate="AVCC" x="182.88" y="160.02" smashed="yes">
 <attribute name="VALUE" x="180.34" y="157.48" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="U$17" gate="G$1" x="167.64" y="152.4" smashed="yes" rot="R90">
+<instance part="L2" gate="G$1" x="167.64" y="152.4" smashed="yes" rot="R90">
 <attribute name="NAME" x="167.64" y="154.94" size="1.778" layer="95"/>
 <attribute name="RATING" x="160.02" y="149.86" size="1.778" layer="96"/>
 </instance>
@@ -16921,6 +16922,13 @@ Source: &lt;a href="http://aosmd.com/res/data_sheets/AOD4189.pdf"&gt; Datasheet 
 <attribute name="VALUE" x="29.21" y="161.798" size="1.778" layer="96"/>
 <attribute name="PN" x="33.02" y="165.1" size="1.778" layer="96" display="off"/>
 </instance>
+<instance part="BATT" gate="-1" x="17.78" y="172.72" smashed="yes" rot="R180">
+<attribute name="NAME" x="14.224" y="173.355" size="1.778" layer="95" rot="R180"/>
+</instance>
+<instance part="BATT" gate="-2" x="17.78" y="177.8" smashed="yes" rot="R180">
+<attribute name="NAME" x="14.224" y="178.435" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="18.796" y="181.102" size="1.778" layer="96" rot="R180"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -16952,6 +16960,10 @@ Source: &lt;a href="http://aosmd.com/res/data_sheets/AOD4189.pdf"&gt; Datasheet 
 <wire x1="27.94" y1="165.1" x2="25.4" y2="165.1" width="0.1524" layer="91"/>
 <wire x1="25.4" y1="165.1" x2="25.4" y2="152.4" width="0.1524" layer="91"/>
 <pinref part="GND42" gate="1" pin="GND"/>
+<pinref part="BATT" gate="-1" pin="1"/>
+<wire x1="20.32" y1="172.72" x2="25.4" y2="172.72" width="0.1524" layer="91"/>
+<wire x1="25.4" y1="172.72" x2="25.4" y2="165.1" width="0.1524" layer="91"/>
+<junction x="25.4" y="165.1"/>
 </segment>
 </net>
 <net name="AVCC" class="0">
@@ -16961,7 +16973,7 @@ Source: &lt;a href="http://aosmd.com/res/data_sheets/AOD4189.pdf"&gt; Datasheet 
 <wire x1="180.34" y1="152.4" x2="182.88" y2="152.4" width="0.1524" layer="91"/>
 <wire x1="182.88" y1="152.4" x2="182.88" y2="157.48" width="0.1524" layer="91"/>
 <pinref part="P+12" gate="AVCC" pin="AVCC"/>
-<pinref part="U$17" gate="G$1" pin="2"/>
+<pinref part="L2" gate="G$1" pin="2"/>
 <wire x1="175.26" y1="152.4" x2="180.34" y2="152.4" width="0.1524" layer="91"/>
 <junction x="180.34" y="152.4"/>
 </segment>
@@ -16974,19 +16986,19 @@ Source: &lt;a href="http://aosmd.com/res/data_sheets/AOD4189.pdf"&gt; Datasheet 
 <wire x1="129.54" y1="152.4" x2="134.62" y2="152.4" width="0.1524" layer="91"/>
 <wire x1="129.54" y1="147.32" x2="129.54" y2="152.4" width="0.1524" layer="91"/>
 <pinref part="C36" gate="G$1" pin="1"/>
-<pinref part="U$16" gate="G$1" pin="P$3"/>
+<pinref part="L1" gate="G$1" pin="P$3"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
 <segment>
 <wire x1="149.86" y1="152.4" x2="152.4" y2="152.4" width="0.1524" layer="91"/>
-<pinref part="U$16" gate="G$1" pin="P$2"/>
+<pinref part="L1" gate="G$1" pin="P$2"/>
 <pinref part="C38" gate="G$1" pin="1"/>
 <wire x1="152.4" y1="152.4" x2="157.48" y2="152.4" width="0.1524" layer="91"/>
 <wire x1="157.48" y1="152.4" x2="160.02" y2="152.4" width="0.1524" layer="91"/>
 <wire x1="152.4" y1="147.32" x2="152.4" y2="152.4" width="0.1524" layer="91"/>
 <junction x="152.4" y="152.4"/>
-<pinref part="U$17" gate="G$1" pin="1"/>
+<pinref part="L2" gate="G$1" pin="1"/>
 <pinref part="+3V6" gate="G$1" pin="+3V3"/>
 <wire x1="157.48" y1="157.48" x2="157.48" y2="152.4" width="0.1524" layer="91"/>
 <junction x="157.48" y="152.4"/>
@@ -17038,18 +17050,23 @@ Source: &lt;a href="http://aosmd.com/res/data_sheets/AOD4189.pdf"&gt; Datasheet 
 <junction x="93.98" y="152.4"/>
 </segment>
 </net>
-<net name="+12V" class="0">
-<segment>
-<pinref part="P+6" gate="1" pin="+12V"/>
-<pinref part="Q2" gate="G$1" pin="D"/>
-<wire x1="53.34" y1="177.8" x2="53.34" y2="175.26" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="N$37" class="0">
 <segment>
 <pinref part="R21" gate="G$1" pin="2"/>
 <pinref part="Q2" gate="G$1" pin="G"/>
 <wire x1="38.1" y1="165.1" x2="45.72" y2="165.1" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="+12V" class="0">
+<segment>
+<pinref part="P+6" gate="1" pin="+12V"/>
+<wire x1="68.58" y1="180.34" x2="68.58" y2="177.8" width="0.1524" layer="91"/>
+<pinref part="BATT" gate="-2" pin="1"/>
+<wire x1="68.58" y1="177.8" x2="53.34" y2="177.8" width="0.1524" layer="91"/>
+<pinref part="Q2" gate="G$1" pin="D"/>
+<wire x1="53.34" y1="177.8" x2="20.32" y2="177.8" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="175.26" x2="53.34" y2="177.8" width="0.1524" layer="91"/>
+<junction x="53.34" y="177.8"/>
 </segment>
 </net>
 </nets>
@@ -17069,27 +17086,27 @@ EDGE_CTRL is the LED emitter current control pin</text>
 <attribute name="SHEET" x="189.23" y="6.35" size="2.54" layer="94"/>
 <attribute name="DRAWING_NAME" x="240.665" y="3.81" size="2.54" layer="94" align="bottom-right"/>
 </instance>
-<instance part="CN4" gate="G$1" x="111.76" y="162.56" smashed="yes" rot="R180">
+<instance part="E_A" gate="G$1" x="111.76" y="162.56" smashed="yes" rot="R180">
 <attribute name="NAME" x="114.3" y="152.4" size="1.27" layer="95" rot="R180"/>
 <attribute name="VALUE" x="114.3" y="154.94" size="1.27" layer="96" rot="R180"/>
 </instance>
-<instance part="CN5" gate="G$1" x="111.76" y="142.24" smashed="yes" rot="R180">
+<instance part="E_B" gate="G$1" x="111.76" y="142.24" smashed="yes" rot="R180">
 <attribute name="NAME" x="114.3" y="132.08" size="1.27" layer="95" rot="R180"/>
 <attribute name="VALUE" x="114.3" y="134.62" size="1.27" layer="96" rot="R180"/>
 </instance>
-<instance part="CN6" gate="G$1" x="111.76" y="121.92" smashed="yes" rot="R180">
+<instance part="E_C" gate="G$1" x="111.76" y="121.92" smashed="yes" rot="R180">
 <attribute name="NAME" x="114.3" y="111.76" size="1.27" layer="95" rot="R180"/>
 <attribute name="VALUE" x="114.3" y="114.3" size="1.27" layer="96" rot="R180"/>
 </instance>
-<instance part="CN7" gate="G$1" x="111.76" y="101.6" smashed="yes" rot="R180">
+<instance part="E_D" gate="G$1" x="111.76" y="101.6" smashed="yes" rot="R180">
 <attribute name="NAME" x="114.3" y="91.44" size="1.27" layer="95" rot="R180"/>
 <attribute name="VALUE" x="114.3" y="93.98" size="1.27" layer="96" rot="R180"/>
 </instance>
-<instance part="CN8" gate="G$1" x="111.76" y="83.82" smashed="yes" rot="R180">
+<instance part="E_E" gate="G$1" x="111.76" y="83.82" smashed="yes" rot="R180">
 <attribute name="NAME" x="114.3" y="73.66" size="1.27" layer="95" rot="R180"/>
 <attribute name="VALUE" x="114.3" y="76.2" size="1.27" layer="96" rot="R180"/>
 </instance>
-<instance part="CN9" gate="G$1" x="111.76" y="63.5" smashed="yes" rot="R180">
+<instance part="E_F" gate="G$1" x="111.76" y="63.5" smashed="yes" rot="R180">
 <attribute name="NAME" x="114.3" y="53.34" size="1.27" layer="95" rot="R180"/>
 <attribute name="VALUE" x="114.3" y="55.88" size="1.27" layer="96" rot="R180"/>
 </instance>
@@ -17135,69 +17152,69 @@ EDGE_CTRL is the LED emitter current control pin</text>
 <nets>
 <net name="EDGE_CTRL" class="0">
 <segment>
-<pinref part="CN4" gate="G$1" pin="4"/>
+<pinref part="E_A" gate="G$1" pin="4"/>
 <wire x1="119.38" y1="167.64" x2="121.92" y2="167.64" width="0.1524" layer="91"/>
 <label x="121.92" y="167.64" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="CN5" gate="G$1" pin="4"/>
+<pinref part="E_B" gate="G$1" pin="4"/>
 <wire x1="119.38" y1="147.32" x2="121.92" y2="147.32" width="0.1524" layer="91"/>
 <label x="121.92" y="147.32" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="CN6" gate="G$1" pin="4"/>
+<pinref part="E_C" gate="G$1" pin="4"/>
 <wire x1="119.38" y1="127" x2="121.92" y2="127" width="0.1524" layer="91"/>
 <label x="121.92" y="127" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="CN7" gate="G$1" pin="4"/>
+<pinref part="E_D" gate="G$1" pin="4"/>
 <wire x1="119.38" y1="106.68" x2="121.92" y2="106.68" width="0.1524" layer="91"/>
 <label x="121.92" y="106.68" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="CN8" gate="G$1" pin="4"/>
+<pinref part="E_E" gate="G$1" pin="4"/>
 <wire x1="119.38" y1="88.9" x2="121.92" y2="88.9" width="0.1524" layer="91"/>
 <label x="121.92" y="88.9" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="CN9" gate="G$1" pin="4"/>
+<pinref part="E_F" gate="G$1" pin="4"/>
 <wire x1="119.38" y1="68.58" x2="121.92" y2="68.58" width="0.1524" layer="91"/>
 <label x="121.92" y="68.58" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="GND" class="0">
 <segment>
-<pinref part="CN4" gate="G$1" pin="3"/>
+<pinref part="E_A" gate="G$1" pin="3"/>
 <wire x1="119.38" y1="165.1" x2="127" y2="165.1" width="0.1524" layer="91"/>
 <wire x1="127" y1="165.1" x2="127" y2="162.56" width="0.1524" layer="91"/>
 <pinref part="GND36" gate="1" pin="GND"/>
 </segment>
 <segment>
-<pinref part="CN9" gate="G$1" pin="3"/>
+<pinref part="E_F" gate="G$1" pin="3"/>
 <wire x1="119.38" y1="66.04" x2="127" y2="66.04" width="0.1524" layer="91"/>
 <pinref part="GND41" gate="1" pin="GND"/>
 <wire x1="127" y1="66.04" x2="127" y2="63.5" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="CN8" gate="G$1" pin="3"/>
+<pinref part="E_E" gate="G$1" pin="3"/>
 <wire x1="119.38" y1="86.36" x2="127" y2="86.36" width="0.1524" layer="91"/>
 <pinref part="GND40" gate="1" pin="GND"/>
 <wire x1="127" y1="86.36" x2="127" y2="83.82" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="CN7" gate="G$1" pin="3"/>
+<pinref part="E_D" gate="G$1" pin="3"/>
 <wire x1="119.38" y1="104.14" x2="127" y2="104.14" width="0.1524" layer="91"/>
 <pinref part="GND39" gate="1" pin="GND"/>
 <wire x1="127" y1="104.14" x2="127" y2="101.6" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="CN6" gate="G$1" pin="3"/>
+<pinref part="E_C" gate="G$1" pin="3"/>
 <wire x1="119.38" y1="124.46" x2="127" y2="124.46" width="0.1524" layer="91"/>
 <pinref part="GND38" gate="1" pin="GND"/>
 <wire x1="127" y1="124.46" x2="127" y2="121.92" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="CN5" gate="G$1" pin="3"/>
+<pinref part="E_B" gate="G$1" pin="3"/>
 <wire x1="119.38" y1="144.78" x2="127" y2="144.78" width="0.1524" layer="91"/>
 <pinref part="GND37" gate="1" pin="GND"/>
 <wire x1="127" y1="144.78" x2="127" y2="142.24" width="0.1524" layer="91"/>
@@ -17205,7 +17222,7 @@ EDGE_CTRL is the LED emitter current control pin</text>
 </net>
 <net name="+3V3" class="0">
 <segment>
-<pinref part="CN9" gate="G$1" pin="2"/>
+<pinref part="E_F" gate="G$1" pin="2"/>
 <wire x1="119.38" y1="63.5" x2="121.92" y2="63.5" width="0.1524" layer="91"/>
 <wire x1="121.92" y1="63.5" x2="121.92" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="121.92" y1="58.42" x2="132.08" y2="58.42" width="0.1524" layer="91"/>
@@ -17213,7 +17230,7 @@ EDGE_CTRL is the LED emitter current control pin</text>
 <pinref part="+3V7" gate="G$1" pin="+3V3"/>
 </segment>
 <segment>
-<pinref part="CN8" gate="G$1" pin="2"/>
+<pinref part="E_E" gate="G$1" pin="2"/>
 <wire x1="119.38" y1="83.82" x2="121.92" y2="83.82" width="0.1524" layer="91"/>
 <wire x1="121.92" y1="83.82" x2="121.92" y2="78.74" width="0.1524" layer="91"/>
 <wire x1="121.92" y1="78.74" x2="132.08" y2="78.74" width="0.1524" layer="91"/>
@@ -17221,7 +17238,7 @@ EDGE_CTRL is the LED emitter current control pin</text>
 <pinref part="+3V8" gate="G$1" pin="+3V3"/>
 </segment>
 <segment>
-<pinref part="CN7" gate="G$1" pin="2"/>
+<pinref part="E_D" gate="G$1" pin="2"/>
 <wire x1="119.38" y1="101.6" x2="121.92" y2="101.6" width="0.1524" layer="91"/>
 <wire x1="121.92" y1="101.6" x2="121.92" y2="96.52" width="0.1524" layer="91"/>
 <wire x1="121.92" y1="96.52" x2="132.08" y2="96.52" width="0.1524" layer="91"/>
@@ -17229,7 +17246,7 @@ EDGE_CTRL is the LED emitter current control pin</text>
 <pinref part="+3V9" gate="G$1" pin="+3V3"/>
 </segment>
 <segment>
-<pinref part="CN6" gate="G$1" pin="2"/>
+<pinref part="E_C" gate="G$1" pin="2"/>
 <wire x1="119.38" y1="121.92" x2="121.92" y2="121.92" width="0.1524" layer="91"/>
 <wire x1="121.92" y1="121.92" x2="121.92" y2="116.84" width="0.1524" layer="91"/>
 <wire x1="121.92" y1="116.84" x2="132.08" y2="116.84" width="0.1524" layer="91"/>
@@ -17237,7 +17254,7 @@ EDGE_CTRL is the LED emitter current control pin</text>
 <pinref part="+3V10" gate="G$1" pin="+3V3"/>
 </segment>
 <segment>
-<pinref part="CN5" gate="G$1" pin="2"/>
+<pinref part="E_B" gate="G$1" pin="2"/>
 <wire x1="119.38" y1="142.24" x2="121.92" y2="142.24" width="0.1524" layer="91"/>
 <wire x1="121.92" y1="142.24" x2="121.92" y2="137.16" width="0.1524" layer="91"/>
 <wire x1="121.92" y1="137.16" x2="132.08" y2="137.16" width="0.1524" layer="91"/>
@@ -17245,7 +17262,7 @@ EDGE_CTRL is the LED emitter current control pin</text>
 <pinref part="+3V11" gate="G$1" pin="+3V3"/>
 </segment>
 <segment>
-<pinref part="CN4" gate="G$1" pin="2"/>
+<pinref part="E_A" gate="G$1" pin="2"/>
 <wire x1="119.38" y1="162.56" x2="121.92" y2="162.56" width="0.1524" layer="91"/>
 <wire x1="121.92" y1="162.56" x2="121.92" y2="157.48" width="0.1524" layer="91"/>
 <wire x1="121.92" y1="157.48" x2="132.08" y2="157.48" width="0.1524" layer="91"/>
@@ -17255,7 +17272,7 @@ EDGE_CTRL is the LED emitter current control pin</text>
 </net>
 <net name="EDGE_A" class="0">
 <segment>
-<pinref part="CN4" gate="G$1" pin="1"/>
+<pinref part="E_A" gate="G$1" pin="1"/>
 <wire x1="119.38" y1="160.02" x2="119.38" y2="154.94" width="0.1524" layer="91"/>
 <wire x1="119.38" y1="154.94" x2="134.62" y2="154.94" width="0.1524" layer="91"/>
 <label x="134.62" y="154.94" size="1.778" layer="95" xref="yes"/>
@@ -17263,7 +17280,7 @@ EDGE_CTRL is the LED emitter current control pin</text>
 </net>
 <net name="EDGE_B" class="0">
 <segment>
-<pinref part="CN5" gate="G$1" pin="1"/>
+<pinref part="E_B" gate="G$1" pin="1"/>
 <wire x1="119.38" y1="139.7" x2="119.38" y2="134.62" width="0.1524" layer="91"/>
 <wire x1="119.38" y1="134.62" x2="137.16" y2="134.62" width="0.1524" layer="91"/>
 <label x="137.16" y="134.62" size="1.778" layer="95" xref="yes"/>
@@ -17271,7 +17288,7 @@ EDGE_CTRL is the LED emitter current control pin</text>
 </net>
 <net name="EDGE_C" class="0">
 <segment>
-<pinref part="CN6" gate="G$1" pin="1"/>
+<pinref part="E_C" gate="G$1" pin="1"/>
 <wire x1="119.38" y1="119.38" x2="119.38" y2="114.3" width="0.1524" layer="91"/>
 <wire x1="119.38" y1="114.3" x2="134.62" y2="114.3" width="0.1524" layer="91"/>
 <label x="134.62" y="114.3" size="1.778" layer="95" xref="yes"/>
@@ -17279,7 +17296,7 @@ EDGE_CTRL is the LED emitter current control pin</text>
 </net>
 <net name="EDGE_D" class="0">
 <segment>
-<pinref part="CN7" gate="G$1" pin="1"/>
+<pinref part="E_D" gate="G$1" pin="1"/>
 <wire x1="119.38" y1="99.06" x2="119.38" y2="93.98" width="0.1524" layer="91"/>
 <wire x1="119.38" y1="93.98" x2="134.62" y2="93.98" width="0.1524" layer="91"/>
 <label x="134.62" y="93.98" size="1.778" layer="95" xref="yes"/>
@@ -17287,7 +17304,7 @@ EDGE_CTRL is the LED emitter current control pin</text>
 </net>
 <net name="EDGE_E" class="0">
 <segment>
-<pinref part="CN8" gate="G$1" pin="1"/>
+<pinref part="E_E" gate="G$1" pin="1"/>
 <wire x1="119.38" y1="81.28" x2="119.38" y2="76.2" width="0.1524" layer="91"/>
 <wire x1="119.38" y1="76.2" x2="134.62" y2="76.2" width="0.1524" layer="91"/>
 <label x="134.62" y="76.2" size="1.778" layer="95" xref="yes"/>
@@ -17295,7 +17312,7 @@ EDGE_CTRL is the LED emitter current control pin</text>
 </net>
 <net name="EDGE_F" class="0">
 <segment>
-<pinref part="CN9" gate="G$1" pin="1"/>
+<pinref part="E_F" gate="G$1" pin="1"/>
 <wire x1="119.38" y1="60.96" x2="119.38" y2="55.88" width="0.1524" layer="91"/>
 <wire x1="119.38" y1="55.88" x2="134.62" y2="55.88" width="0.1524" layer="91"/>
 <label x="134.62" y="55.88" size="1.778" layer="95" xref="yes"/>
