@@ -1,0 +1,17 @@
+//attempt at starting encoder decoding on PORT D
+
+#define pins (1 << 1 | 0 << 1) // pins 0 and 1.
+
+PORTD.DIRCLR = pins; //set both pins as inputs
+PORTD.MPCMASK = pins; //configure all the pin registers at once.
+PORTD.PIN0CTRL = 0x03; //set both pins to level sensing
+
+EVSYS.CH0MUX = 0x60 | 0x08; //set pin 0 as the multiplexer input
+EVSYS.CH0CTRL = EVSYS_QDEN_bm | EVSYS_DIGFILT_2SAMPLES_gc; //configure channel 0 for quadrature decoding with 2 samples(?)
+
+TCC0.CTRLD = TC_QDEC_bm | 0x08 | 0x00; //enable quadrature decoding on the T/C. select channel 0 as event source.
+
+TCC0.PER = 28*4 - 1; //set the period to the total number of events per revolution (motor shaft) *4 -1 (see Atmel documentation).
+// may consider using the wheel number events per revolution (723.24) -> ~ 2,892 (from 2,891.96)
+
+TCC0.CTRLA.TC_CLKSEL_DIV1_gc; //enable the TC.
