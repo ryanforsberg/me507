@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.4.2">
+<eagle version="9.5.1">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -10661,10 +10661,10 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <smd name="S2" x="3.2" y="2.45" dx="1.6" dy="1.4" layer="1"/>
 <smd name="S4" x="-1.2" y="0" dx="1.9" dy="1.9" layer="1"/>
 <smd name="S3" x="1.2" y="0" dx="1.9" dy="1.9" layer="1"/>
-<hole x="-3.3" y="0" drill="0.5"/>
-<hole x="3.3" y="0" drill="0.5"/>
-<pad name="S5" x="-3.3" y="0" drill="0.5" diameter="0.9" shape="long" rot="R90"/>
-<pad name="S6" x="3.3" y="0" drill="0.5" diameter="0.9" shape="long" rot="R90"/>
+<pad name="S5" x="-3.3" y="0" drill="0.4" diameter="1" shape="long" rot="R90"/>
+<pad name="S6" x="3.3" y="0" drill="0.4" diameter="1" shape="long" rot="R90"/>
+<hole x="-3.302" y="0" drill="1.1"/>
+<hole x="3.302" y="0" drill="1.1"/>
 </package>
 </packages>
 <symbols>

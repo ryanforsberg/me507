@@ -3,7 +3,7 @@
 <eagle version="9.5.1">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="25" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
@@ -1942,10 +1942,10 @@ for trimmer refence see : &lt;u&gt;www.electrospec-inc.com/cross_references/trim
 <smd name="S2" x="3.2" y="2.45" dx="1.6" dy="1.4" layer="1"/>
 <smd name="S4" x="-1.2" y="0" dx="1.9" dy="1.9" layer="1"/>
 <smd name="S3" x="1.2" y="0" dx="1.9" dy="1.9" layer="1"/>
-<hole x="-3.3" y="0" drill="0.5"/>
-<hole x="3.3" y="0" drill="0.5"/>
-<pad name="S5" x="-3.3" y="0" drill="0.5" diameter="0.9" shape="long" rot="R90"/>
-<pad name="S6" x="3.3" y="0" drill="0.5" diameter="0.9" shape="long" rot="R90"/>
+<pad name="S5" x="-3.3" y="0" drill="0.4" diameter="1" shape="long" rot="R90"/>
+<pad name="S6" x="3.3" y="0" drill="0.4" diameter="1" shape="long" rot="R90"/>
+<hole x="-3.302" y="0" drill="1.1"/>
+<hole x="3.302" y="0" drill="1.1"/>
 </package>
 </packages>
 </library>
@@ -3480,6 +3480,11 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <vertex x="88.265" y="33.02"/>
 <vertex x="81.915" y="33.02"/>
 </polygon>
+<wire x1="30.0228" y1="1.4478" x2="29.845" y2="1.27" width="0.1778" layer="1"/>
+<wire x1="38.225" y1="1.4478" x2="39.1922" y2="1.4478" width="0.1778" layer="1"/>
+<wire x1="39.1922" y1="1.4478" x2="39.37" y2="1.27" width="0.1778" layer="1"/>
+<wire x1="38.225" y1="1.4478" x2="30.0228" y2="1.4478" width="0.1778" layer="1"/>
+<wire x1="29.845" y1="1.27" x2="31.625" y2="1.4478" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="!RESET">
 <contactref element="R1" pad="2"/>
