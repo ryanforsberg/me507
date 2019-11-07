@@ -2,6 +2,10 @@
 Cal Poly ME 507 Sumo Bot Project
 
 Todos:
-* Final Charlie check
-* ???
-* Profit
+* Order board
+* Order wheels & hubs
+* Software
+ - Define tasks
+ - Research registers
+ - FreeRTOS reading
+* Chassis
