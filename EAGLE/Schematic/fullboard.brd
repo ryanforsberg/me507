@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.4.2">
+<eagle version="9.5.1">
 <drawing>
 <settings>
 <setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="25" unitdist="mil" unit="mm" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="25" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
@@ -176,6 +176,8 @@
 ME 507 - Mechanical Control System Design
 Fall 2019 - SumoBot v1.0
 Ryan Forsberg &amp; Philippe Habets</text>
+<text x="35.56" y="21.59" size="1.016" layer="26" rot="MR0">+5V</text>
+<text x="29.21" y="35.56" size="1.016" layer="26" rot="MR0">+3.3V</text>
 </plain>
 <libraries>
 <library name="rcl" urn="urn:adsk.eagle:library:334">
@@ -3214,7 +3216,7 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <wire x1="38.1" y1="22.86" x2="37.465" y2="23.495" width="0.8128" layer="1"/>
 <wire x1="38.1" y1="22.86" x2="38.1" y2="17.145" width="0.8128" layer="1"/>
 <wire x1="37.465" y1="23.495" x2="24.765" y2="36.195" width="0.8128" layer="16"/>
-<via x="24.765" y="36.195" extent="1-16" drill="0.35"/>
+<via x="24.765" y="36.195" extent="1-16" drill="0.4"/>
 <wire x1="24.765" y1="36.195" x2="24.765" y2="40.05" width="0.8128" layer="1"/>
 <wire x1="10.0972" y1="17.7172" x2="12.33538125" y2="17.7172" width="0.8128" layer="1"/>
 <wire x1="10.0972" y1="17.7172" x2="7.5692" y2="15.1892" width="0.8128" layer="1"/>
@@ -4195,7 +4197,9 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <wire x1="29.955" y1="25.27" x2="29.845" y2="25.38" width="0.8128" layer="1"/>
 <wire x1="29.845" y1="25.38" x2="29.845" y2="31.58" width="0.8128" layer="1"/>
 <wire x1="33.02" y1="17.145" x2="33.02" y2="22.73" width="0.8128" layer="1"/>
-<wire x1="33.02" y1="22.73" x2="35.56" y2="25.27" width="0.8128" layer="1"/>
+<wire x1="33.02" y1="22.73" x2="33.4025" y2="23.1125" width="0.8128" layer="1"/>
+<wire x1="35.56" y1="25.27" x2="33.4025" y2="23.1125" width="0.8128" layer="1"/>
+<via x="33.4025" y="23.1125" extent="1-16" drill="0.4"/>
 </signal>
 <signal name="N$20">
 <contactref element="LED2" pad="C"/>
