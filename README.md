@@ -9,3 +9,4 @@ Todos:
  - FreeRTOS reading
  - Testing
 * Chassis
+* Finish PCB soldering/fab
