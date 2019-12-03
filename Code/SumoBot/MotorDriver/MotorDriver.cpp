@@ -1,8 +1,8 @@
 ﻿#include MotorDriver.h
 
 /* Motor Driver Task CPP File
-* TODO: Turn on the ENABLE pins.
-*		Verify that compare = 0 is effectively 0% PWM
+* TODO: Verify that compare = 0 is effectively 0% PWM
+*		Lol all the testing
 *
 * DOCUMENTATION:
 * Truth Table:
@@ -41,7 +41,7 @@ protected:
 public:
 	// constructor
 	MotorDriver::MotorDriver (const char* instance_name)
-	: TaskBase (instance_name)
+	: TaskBase (instance_name,,)
 	//arguments are (in order) - a_name, a_priority, a_stack_size, p_ser_dev)
 	{
 		
@@ -51,7 +51,7 @@ public:
 	void MotorDriver::run (void)
 	{
 		//!!!---- SETUP ----!!!
-		PORTE_DIRSET = 0b01111110;	// config pins 2 through 6 as output
+		PORTE_DIRSET = 0b01111110;	// config pins 1 through 6 as output
 		PORTE_REMAP = 0b00000011;	// remap compare channels A to pin 4.
 									// and compare channel B to pin 5.
 									// see REMAP (page 151).
@@ -67,6 +67,8 @@ public:
 		
 		TCE0_CTRLA = 0x01;			// turn ON the timer counter - no prescaler
 									// see CTRLA (page 175)
+									
+		PORTE_OUTSET = 6<<0x01 | 1<<0x01; // enable all of the half bridges with pins 1 and 6.
 		
 		
 		//!!!----  RUN  ----!!!
@@ -74,7 +76,7 @@ public:
 		{
 			// pull the new data from the communication variables
 			FWD = commForward.get();
-			BCK = commBack.get();
+			BCK = commBackward.get();
 			LFT = commLeft.get();
 			RHT = commRight.get();
 			
