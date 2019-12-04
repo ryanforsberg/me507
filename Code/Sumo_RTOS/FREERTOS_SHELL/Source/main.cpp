@@ -40,6 +40,8 @@
 #include "task_Motor.h"
 #include "task_mastermind.h"
 
+#include "EdgeSensor_Digital.h"
+
 
 						//Motors Stuff
 shared_data<bool>* commForward;
@@ -71,7 +73,6 @@ int main (void)
 	// sometimes the watchdog timer may have been left on...and it tends to stay on	 
 	wdt_disable ();
 
-
 	commForward = new shared_data<bool>;
 	commBackward = new shared_data<bool>;
 	commLeft = new shared_data<bool>;
@@ -97,6 +98,7 @@ int main (void)
 	
 	new task_Motor("MOTORS", task_priority (2), 500, &ser_dev);
 	new task_mastermind("Mastermind", task_priority(1), 500, &ser_dev);
+	new EdgeSensor("Edge", task_priority(2), 500, &ser_dev);
 	
 	// Enable high - low level interrupts and enable global interrupts
 	PMIC_CTRL = (1 << PMIC_HILVLEN_bp | 1 << PMIC_MEDLVLEN_bp | 1 << PMIC_LOLVLEN_bp);
