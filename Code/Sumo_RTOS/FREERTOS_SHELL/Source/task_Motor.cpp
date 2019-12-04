@@ -70,11 +70,11 @@ void task_Motor::run(void)
 	//!!!----  RUN  ----!!!
 	while(1)
 	{
-	/*	FWD = commForward->get();
+		FWD = commForward->get();
 		BCK = commForward->get();
 		LFT = commForward->get();
 		RHT = commRight->get();
-		effort = commEffort->get(); */
+		effort = commEffort->get();
 		
 		((LFT^RHT)&(!FWD+BCK))?transition_to(PIVOT):(void)0;    // pivot	(Left XOR Right) AND NOT (Forward OR Back)
 		((LFT^RHT)&(FWD^BCK))?transition_to(TURN):(void)0;		// turn		(Left XOR Right) AND (Forward XOR Back)
