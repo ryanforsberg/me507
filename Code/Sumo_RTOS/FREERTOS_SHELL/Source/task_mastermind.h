@@ -38,6 +38,12 @@ class task_mastermind : public frt_task
 			IDLE
 		};
 		volatile bool fake;
+		uint8_t LF;
+		uint8_t RF;
+		uint8_t LM;
+		uint8_t RM;
+		uint8_t LR;
+		uint8_t RR;
 	private:
 
 	//functions
@@ -47,6 +53,15 @@ class task_mastermind : public frt_task
 		
 		//run function
 		void run(void);
+		void Forward(void);
+		void Backward(void);
+		void Right_Backward(void);
+		void Left_Backward(void);
+		void Right_Forward(void);
+		void Left_Forward(void);
+		void Pivot_Right(void);
+		void Pivot_Left(void);
+
 	protected:
 	private:
 

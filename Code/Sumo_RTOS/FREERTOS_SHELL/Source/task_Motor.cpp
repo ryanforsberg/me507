@@ -38,7 +38,7 @@ void task_Motor::run(void)
 {
 	//!!!---- SETUP ----!!!
 	compare = 0;				//start at 0 power
-	effort = 0x7F;
+	effort = 0x60;
 	FWD = 0;					//start at 0 movement
 	BCK = 0;
 	RHT = 0;
@@ -82,7 +82,7 @@ void task_Motor::run(void)
 		switch(state)
 		{
 			case(IDLE):
-				
+				set_outputs(0,0,0,0,0);
 			break;
 			case(STRAIGHT):
 				set_outputs(FWD,FWD,BCK,BCK,compare);
@@ -91,8 +91,10 @@ void task_Motor::run(void)
 				set_outputs(RHT,LFT,LFT,RHT,compare);
 			break;		
 			case(TURN):
-				set_outputs(FWD&RHT,FWD&LFT,BCK&RHT,BCK&LFT,compare);
+				set_outputs(FWD&LFT,FWD&RHT,BCK&RHT,BCK&LFT,compare);
 			break;	
 		}
+		
+		vTaskDelay(10); // Delay task 10ms
 	}
 }

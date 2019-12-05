@@ -96,10 +96,10 @@ int main (void)
 	// of the task transitions.
 	// new task_LED ("LED BLINKER", task_priority (1), 260, &ser_dev);
 	
-	task_Motor* MOTORS = new task_Motor("MOTORS", task_priority (2), 500, &ser_dev);
+	new task_Motor("MOTORS", task_priority (2), 500, &ser_dev);
 	
 	new task_mastermind("Mastermind", task_priority(2), 500, &ser_dev);
-	//new EdgeSensor("Edge", task_priority(2), 500, &ser_dev);
+	new EdgeSensor("Edge", task_priority(2), 500, &ser_dev);
 	
 	// Enable high - low level interrupts and enable global interrupts
 	PMIC_CTRL = (1 << PMIC_HILVLEN_bp | 1 << PMIC_MEDLVLEN_bp | 1 << PMIC_LOLVLEN_bp);
