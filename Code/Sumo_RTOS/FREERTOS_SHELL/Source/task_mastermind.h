@@ -40,7 +40,6 @@ class task_mastermind : public frt_task
 			BACKWARD_RIGHT,
 			FULL_POWER
 		};
-		uint8_t current_state;
 	private:
 
 	//functions

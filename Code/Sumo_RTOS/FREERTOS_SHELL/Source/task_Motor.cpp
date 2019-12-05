@@ -5,7 +5,7 @@
 * Author: Phil
 */
 
-#define period 32000						// used for prescaler and effort calculations
+#define period 124						// used for prescaler and effort calculations
 
 #include <avr/io.h>                         // Port I/O for SFR's
 #include <avr/wdt.h>                        // Watchdog timer header
@@ -36,15 +36,11 @@ void set_outputs(bool FWD_A, bool FWD_B, bool BCK_A, bool BCK_B,uint16_t compare
 //run function
 void task_Motor::run(void)
 {
-	//PORTE_DIRSET = PIN1_bm | PIN2_bm | PIN3_bm;
-	//PORTE_OUTSET = PIN1_bm | PIN2_bm;
-	
-	
 	//!!!---- SETUP ----!!!
 	compare = 0;				//start at 0 power
-	effort = 0x7FFF;
-	FWD = 0;					//start at 0 movement
-	BCK = 1;
+	effort = 0x7F;
+	FWD = 1;					//start at 0 movement
+	BCK = 0;
 	RHT = 0;
 	LFT = 0;
 	
@@ -62,25 +58,28 @@ void task_Motor::run(void)
 	
 	set_outputs(0,0,0,0,0);		// make sure all the directions are off at the start.
 	
-	TCE0_CTRLA = 0x01;			// turn ON the timer counter - no prescaler
+	TCE0_CTRLA = TC_CLKSEL_DIV256_gc;			// turn ON the timer counter - no prescaler
 								// see CTRLA (page 175)
 	
-	PORTE_OUTSET = 6<<0x01 | 1<<0x01; // enable all of the half bridges with pins 1 and 6.
+	PORTE_OUTSET = PIN6_bm | PIN1_bm; // enable all of the half bridges with pins 1 and 6.
 	
 	//!!!----  RUN  ----!!!
 	while(1)
 	{
-		FWD = commForward->get();
+		/*FWD = commForward->get();
 		BCK = commForward->get();
 		LFT = commForward->get();
 		RHT = commRight->get();
-		effort = commEffort->get();
+		effort = commEffort->get();*/
 		
 		((LFT^RHT)&(!FWD+BCK))?transition_to(PIVOT):(void)0;    // pivot	(Left XOR Right) AND NOT (Forward OR Back)
 		((LFT^RHT)&(FWD^BCK))?transition_to(TURN):(void)0;		// turn		(Left XOR Right) AND (Forward XOR Back)
 		((FWD^BCK)&(!(LFT+RHT)))?transition_to(STRAIGHT):(void)0;	// straight (Forward XOR Back) AND NOT (Left OR Right)
 		(FWD+BCK+LFT+RHT)?transition_to(IDLE):(void)0;			// idle
-		compare = effort*period/0xFFFF;
+		//compare = effort*period/0xFFFF;
+		compare = period/2;
+
+
 		
 		switch(state)
 		{
@@ -88,7 +87,7 @@ void task_Motor::run(void)
 				
 			break;
 			case(STRAIGHT):
-				set_outputs(FWD,BCK,BCK,FWD,compare);
+				set_outputs(FWD,FWD,BCK,BCK,compare);
 			break;
 			case(PIVOT):
 				set_outputs(RHT,LFT,LFT,RHT,compare);

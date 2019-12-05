@@ -29,26 +29,27 @@ task_mastermind::task_mastermind(const char* a_name,
 void task_mastermind::run(void)
 {
 	delay_ms(startdelay); //wait a second for the user to be ready
+	PORTD_DIRSET = PIN2_bm;
 	while(1)
 	{
-		delay_ms(rundelay);
-		current_state = get_state();
 		switch(state)
 		{
 			case(FORWARD):
+				PORTD_OUTSET = PIN2_bm;
 				commForward->put(true);
 				commBackward->put(false);
 				commLeft->put(false);
 				commRight->put(false);
-				commEffort->put(0x1999);		//10% effort
+				commEffort->put(0X7F);		//10% effort
 				transition_to(BACKWARD);
 			break;
 			case(BACKWARD):
+				PORTD_OUTCLR = PIN2_bm;
 				commForward->put(false);
 				commBackward->put(true);
 				commLeft->put(false);
 				commRight->put(false);
-				commEffort->put(0x1999);		//10% effort
+				commEffort->put(0X7F);		//10% effort
 				transition_to(FORWARD);
 			break;
 			case(PIVOT_RIGHT):
@@ -56,7 +57,7 @@ void task_mastermind::run(void)
 				commBackward->put(false);
 				commLeft->put(false);
 				commRight->put(true);
-				commEffort->put(0x1999);		//10% effort
+				commEffort->put(0X7F);		//10% effort
 				transition_to(PIVOT_LEFT);
 			break;
 			case(PIVOT_LEFT):
@@ -64,7 +65,7 @@ void task_mastermind::run(void)
 				commBackward->put(false);
 				commLeft->put(true);
 				commRight->put(false);
-				commEffort->put(0x1999);		//10% effort
+				commEffort->put(0X7F);		//10% effort
 				transition_to(FORWARD_LEFT);
 			break;
 			case(FORWARD_LEFT):
@@ -72,7 +73,7 @@ void task_mastermind::run(void)
 				commBackward->put(false);
 				commLeft->put(true);
 				commRight->put(false);
-				commEffort->put(0x1999);		//10% effort
+				commEffort->put(0X7F);		//10% effort
 				transition_to(FORWARD_RIGHT);
 			break;
 			case(FORWARD_RIGHT):
@@ -80,7 +81,7 @@ void task_mastermind::run(void)
 				commBackward->put(false);
 				commLeft->put(false);
 				commRight->put(true);
-				commEffort->put(0x1999);		//10% effort
+				commEffort->put(0X7F);		//10% effort
 				transition_to(BACKWARD_LEFT);
 			break;
 			case(BACKWARD_LEFT):
@@ -88,7 +89,7 @@ void task_mastermind::run(void)
 				commBackward->put(true);
 				commLeft->put(true);
 				commRight->put(false);
-				commEffort->put(0x1999);		//10% effort
+				commEffort->put(0X7F);		//10% effort
 				transition_to(BACKWARD_RIGHT);
 			break;
 			case(BACKWARD_RIGHT):
@@ -96,7 +97,7 @@ void task_mastermind::run(void)
 				commBackward->put(true);
 				commLeft->put(true);
 				commRight->put(false);
-				commEffort->put(0x1999);		//10% effort
+				commEffort->put(0X7F);		//10% effort
 				transition_to(FULL_POWER);
 			break;
 			case(FULL_POWER):
@@ -104,7 +105,7 @@ void task_mastermind::run(void)
 				commBackward->put(false);
 				commLeft->put(false);
 				commRight->put(false);
-				commEffort->put(0x7FFF);		//10% effort
+				commEffort->put(0x7F);		//10% effort
 				transition_to(FORWARD);
 			break;
 		}

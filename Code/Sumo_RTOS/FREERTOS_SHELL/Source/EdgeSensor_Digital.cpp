@@ -23,56 +23,70 @@ EdgeSensor::EdgeSensor(const char* a_name,
 	: frt_task (a_name, a_priority, a_stack_size, p_ser_dev)
 	{
 	
-	} //MotorDriver
+	} 
 
 
 void EdgeSensor::run(void)
 {
 	//Share <uint8_t> edge_out->put();  // Define share to be read by Mastermind
 	
-	PORTC_DIRSET = 1;	  // Edge CTRL: Pin C0. Set CTRL as output
-	PORTA_DIRCLR = 0b11111100;  // Edge OUT: Pins A2-A7. Set OUTs as input
-/*
+	/*
+	
+	
+	PORTC_DIRSET = PIN0_bm;	  // Edge CTRL: Pin C0. Set CTRL as output
+	PORTC_OUTSET = PIN0_bm;	// Drive CTRL pin high to turn on emitters
+	
+	PORTA_DIRCLR = PIN2_bm & PIN3_bm & PIN4_bm & PIN5_bm & PIN6_bm & PIN7_bm;  // Edge OUT: Pins A2-A7. Set OUTs as input
+	
+	PORTD_DIRSET = PIN2_bm;	  // Set Pin 2 of Port D as output for testing
+	
+	
 	for(;;)
 	{
 		edge_out->put(0);	// Reset output values each loop
 		
-		if (!(PORTA_IN.A2)) // If edge detection sensor A output is low (reading white)
+		if (!(PORTA_IN & PIN2_bm)) // If edge detection sensor A output is low (reading white)
 		{
 			edge_out->put(1);    // 00000001
 			
-			PORTD_OUTSET = (1<<2);  // Drive pin D2 high
-		}
-		else
-		{
-			PORTD_OUTCLR = (1<<2);  // Drive pin D2 low
+			PORTD_OUTSET = PIN2_bm;  // Drive pin D2 high
 		}
 		
-		if (!(PORTA_IN.A3)) // If edge detection sensor B output is low (reading white)
+		if (!(PORTA_IN & PIN3_bm)) // If edge detection sensor B output is low (reading white)
 		{
 			edge_out->put(edge_out->get() | (1<<1)); // 00000010
+			PORTD_OUTSET = PIN2_bm;  // Drive pin D2 high
 		}
 		
-		if (!(PORTA_IN.A4)) // If edge detection sensor C output is low (reading white)
+		if (!(PORTA_IN & PIN4_bm)) // If edge detection sensor C output is low (reading white)
 		{
 			edge_out->put(edge_out->get() | (1<<2)); // 00000100
+			PORTD_OUTSET = PIN2_bm;  // Drive pin D2 high
 		}
 		
-		if (!(PORTA_IN.A5)) // If edge detection sensor D output is low (reading white)
+		if (!(PORTA_IN & PIN5_bm)) // If edge detection sensor D output is low (reading white)
 		{
 			edge_out->put(edge_out->get() | (1<<3)); // 00001000
+			PORTD_OUTSET = PIN2_bm;  // Drive pin D2 high
 		}
 		
-		if (!(PORTA_IN.A6)) // If edge detection sensor A output is low (reading white)
+		if (!(PORTA_IN & PIN6_bm)) // If edge detection sensor A output is low (reading white)
 		{
 			edge_out->put(edge_out->get() | (1<<4));  // 00010000
+			PORTD_OUTSET = PIN2_bm;  // Drive pin D2 high
 		}
 		
-		if (!(PORTA_IN.A7)) // If edge detection sensor A output is low (reading white)
+		if (!(PORTA_IN & PIN7_bm)) // If edge detection sensor A output is low (reading white)
 		{
 			edge_out->put(edge_out->get() | (1<<5));  // 00100000
+			PORTD_OUTSET = PIN2_bm;  // Drive pin D2 high
+		}
+		
+		if ((PORTA_IN & (PIN2_bm | PIN3_bm | PIN4_bm | PIN5_bm | PIN6_bm | PIN7_bm)))
+		{
+			PORTD_OUTCLR = PIN2_bm;  // Drive pin D2 low
 		}
 		
 		vTaskDelay(1); // Delay task 1ms
-	}*/
+	} */
 }
