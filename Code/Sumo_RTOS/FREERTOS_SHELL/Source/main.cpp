@@ -85,7 +85,7 @@ int main (void)
 	// mation, or to allow user interaction, or for whatever use is appropriate.  The
 	// serial port will be used by the user interface task after setup is complete and
 	// the task scheduler has been started by the function vTaskStartScheduler()
-	rs232 ser_dev(0,&USARTE0); // Create a serial device on USART E0
+	rs232 ser_dev(0,&USARTC0); // Create a serial device on USART E0
 	ser_dev << clrscr << "FreeRTOS Xmega Testing Program" << endl << endl;
 	
 	// The user interface is at low priority; it could have been run in the idle task
@@ -97,8 +97,8 @@ int main (void)
 	// new task_LED ("LED BLINKER", task_priority (1), 260, &ser_dev);
 	
 	new task_Motor("MOTORS", task_priority (2), 500, &ser_dev);
-	new task_mastermind("Mastermind", task_priority(1), 500, &ser_dev);
-	new EdgeSensor("Edge", task_priority(2), 500, &ser_dev);
+	//new task_mastermind("Mastermind", task_priority(1), 500, &ser_dev);
+	//new EdgeSensor("Edge", task_priority(2), 500, &ser_dev);
 	
 	// Enable high - low level interrupts and enable global interrupts
 	PMIC_CTRL = (1 << PMIC_HILVLEN_bp | 1 << PMIC_MEDLVLEN_bp | 1 << PMIC_LOLVLEN_bp);

@@ -27,10 +27,10 @@ task_Motor::task_Motor(const char* a_name,
 
 void set_outputs(bool FWD_A, bool FWD_B, bool BCK_A, bool BCK_B,uint16_t compare)
 {
-	TCE0_CCA = FWD_A*compare; // Hardware pin E4
-	TCE0_CCB = BCK_A*compare; // Hardware pin E5
-	TCE0_CCC = BCK_B*compare; // Hardware pin E2
-	TCE0_CCD = FWD_B*compare; // Hardware pin E3
+	TCE0_CCA = 1*period/2; // Hardware pin E4
+	TCE0_CCB = 1*period/2; // Hardware pin E5
+	TCE0_CCC = 1*period/2; // Hardware pin E2
+	TCE0_CCD = 1*period/2; // Hardware pin E3
 }
 
 //run function
@@ -39,13 +39,13 @@ void task_Motor::run(void)
 	//!!!---- SETUP ----!!!
 	compare = 0;				//start at 0 power
 	effort = 0x7F;
-	FWD = 1;					//start at 0 movement
-	BCK = 0;
+	FWD = 0;					//start at 0 movement
+	BCK = 1;
 	RHT = 0;
 	LFT = 0;
 	
 	PORTE_DIRSET = 0b01111110;	// config pins 1 through 6 as output
-	PORTE_REMAP = 0b00000011;	// remap compare channels A to pin 4.
+	PORTE_REMAP = PORT_TC0A_bm | PORT_TC0B_bm;	// remap compare channels A to pin 4.
 								// and compare channel B to pin 5.
 								// see REMAP (page 151).
 	
@@ -54,7 +54,7 @@ void task_Motor::run(void)
 								// aiming for 1 KHz right now (6.6us rise time on half-bridge, recommends at least 10x slower).
 	
 								// config register B (page 175), single slope PWM, enable compare and capture on channels A, B, C, and D.
-	TCE0_CTRLB = TC_WGMODE_SINGLESLOPE_gc | TC0_CCAEN_bm | TC0_CCBEN_bm| TC0_CCCEN_bm| TC0_CCDEN_bm;
+	TCE0_CTRLB = TC_WGMODE_SINGLESLOPE_gc | TC0_CCAEN_bm | TC0_CCBEN_bm | TC0_CCCEN_bm| TC0_CCDEN_bm;
 	
 	set_outputs(0,0,0,0,0);		// make sure all the directions are off at the start.
 	
