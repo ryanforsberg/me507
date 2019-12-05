@@ -47,7 +47,7 @@ extern shared_data<bool>* commForward;
 extern shared_data<bool>* commBackward;
 extern shared_data<bool>* commLeft;
 extern shared_data<bool>* commRight;
-extern shared_data<uint16_t>* commEffort;
+extern shared_data<uint8_t>* commEffort;
 
 extern shared_data<uint8_t>* edge_out;
 

@@ -48,7 +48,7 @@ shared_data<bool>* commForward;
 shared_data<bool>* commBackward;
 shared_data<bool>* commLeft;
 shared_data<bool>* commRight;
-shared_data<uint16_t>* commEffort;
+shared_data<uint8_t>* commEffort;
 
 						//Edge Stuff
 shared_data<uint8_t>* edge_out;	
@@ -77,7 +77,7 @@ int main (void)
 	commBackward = new shared_data<bool>;
 	commLeft = new shared_data<bool>;
 	commRight = new shared_data<bool>;
-	commEffort = new shared_data<uint16_t>;
+	commEffort = new shared_data<uint8_t>;
 	
 	edge_out = new shared_data<uint8_t>;
 
@@ -94,7 +94,7 @@ int main (void)
 	
 	// The LED blinking task is also low priority and is used to test the timing accuracy
 	// of the task transitions.
-	new task_LED ("LED BLINKER", task_priority (1), 260, &ser_dev);
+	// new task_LED ("LED BLINKER", task_priority (1), 260, &ser_dev);
 	
 	new task_Motor("MOTORS", task_priority (2), 500, &ser_dev);
 	new task_mastermind("Mastermind", task_priority(1), 500, &ser_dev);
