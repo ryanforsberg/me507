@@ -23,89 +23,58 @@ task_mastermind::task_mastermind(const char* a_name,
 						)
 	: frt_task (a_name, a_priority, a_stack_size, p_ser_dev)
 {
-	
+
 } //mastermind
 
 void task_mastermind::run(void)
 {
 	delay_ms(startdelay); //wait a second for the user to be ready
-	PORTD_DIRSET = PIN2_bm;
+	fake = 1;
 	while(1)
-	{
+	{	
+		delay_ms(1000);
 		switch(state)
 		{
+			case(INIT):
+				if(fake)
+				{
+					transition_to(FORWARD);	
+				}
+				
+			break;
 			case(FORWARD):
-				PORTD_OUTSET = PIN2_bm;
-				commForward->put(true);
-				commBackward->put(false);
-				commLeft->put(false);
-				commRight->put(false);
-				commEffort->put(0X7F);		//10% effort
+				commBackward->put(0);
+				commForward->put(1);
+				commLeft->put(0);
+				commRight->put(0);
 				transition_to(BACKWARD);
 			break;
 			case(BACKWARD):
-				PORTD_OUTCLR = PIN2_bm;
-				commForward->put(false);
-				commBackward->put(true);
-				commLeft->put(false);
-				commRight->put(false);
-				commEffort->put(0X7F);		//10% effort
-				transition_to(FORWARD);
+				commBackward->put(1);
+				commForward->put(0);
+				commLeft->put(0);
+				commRight->put(0);
+				transition_to(RIGHT);
 			break;
-			case(PIVOT_RIGHT):
-				commForward->put(false);
-				commBackward->put(false);
-				commLeft->put(false);
-				commRight->put(true);
-				commEffort->put(0X7F);		//10% effort
-				transition_to(PIVOT_LEFT);
+			case(RIGHT):
+				commBackward->put(0);
+				commForward->put(0);
+				commLeft->put(0);
+				commRight->put(1);
+				transition_to(LEFT);
 			break;
-			case(PIVOT_LEFT):
-				commForward->put(false);
-				commBackward->put(false);
-				commLeft->put(true);
-				commRight->put(false);
-				commEffort->put(0X7F);		//10% effort
-				transition_to(FORWARD_LEFT);
+			case(LEFT):
+				commBackward->put(0);
+				commForward->put(0);
+				commLeft->put(1);
+				commRight->put(0);
+				transition_to(IDLE);
 			break;
-			case(FORWARD_LEFT):
-				commForward->put(true);
-				commBackward->put(false);
-				commLeft->put(true);
-				commRight->put(false);
-				commEffort->put(0X7F);		//10% effort
-				transition_to(FORWARD_RIGHT);
-			break;
-			case(FORWARD_RIGHT):
-				commForward->put(true);
-				commBackward->put(false);
-				commLeft->put(false);
-				commRight->put(true);
-				commEffort->put(0X7F);		//10% effort
-				transition_to(BACKWARD_LEFT);
-			break;
-			case(BACKWARD_LEFT):
-				commForward->put(false);
-				commBackward->put(true);
-				commLeft->put(true);
-				commRight->put(false);
-				commEffort->put(0X7F);		//10% effort
-				transition_to(BACKWARD_RIGHT);
-			break;
-			case(BACKWARD_RIGHT):
-				commForward->put(false);
-				commBackward->put(true);
-				commLeft->put(true);
-				commRight->put(false);
-				commEffort->put(0X7F);		//10% effort
-				transition_to(FULL_POWER);
-			break;
-			case(FULL_POWER):
-				commForward->put(true);
-				commBackward->put(false);
-				commLeft->put(false);
-				commRight->put(false);
-				commEffort->put(0x7F);		//10% effort
+			case(IDLE):
+				commBackward->put(0);
+				commForward->put(0);
+				commLeft->put(0);
+				commRight->put(0);
 				transition_to(FORWARD);
 			break;
 		}

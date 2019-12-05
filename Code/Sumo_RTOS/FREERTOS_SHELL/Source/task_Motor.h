@@ -36,6 +36,7 @@ class task_Motor : public frt_task
 		bool BCK;
 		bool RHT;
 		bool LFT;
+		bool c_fwd;
 		enum Motor_states {
 			IDLE,
 			STRAIGHT,

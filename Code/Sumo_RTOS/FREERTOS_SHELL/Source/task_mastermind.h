@@ -29,17 +29,15 @@ class task_mastermind : public frt_task
 	//variables
 	public:
 	protected:
-		enum Motor_states {
+		enum mastermind_states {
+			INIT,
 			FORWARD,
 			BACKWARD,
-			PIVOT_LEFT,
-			PIVOT_RIGHT,
-			FORWARD_LEFT,
-			FORWARD_RIGHT,
-			BACKWARD_LEFT,
-			BACKWARD_RIGHT,
-			FULL_POWER
+			RIGHT,
+			LEFT,
+			IDLE
 		};
+		volatile bool fake;
 	private:
 
 	//functions

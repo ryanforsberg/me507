@@ -27,10 +27,10 @@ task_Motor::task_Motor(const char* a_name,
 
 void set_outputs(bool FWD_A, bool FWD_B, bool BCK_A, bool BCK_B,uint16_t compare)
 {
-	TCE0_CCA = FWD_A*period/2; // Hardware pin E4
-	TCE0_CCB = 1*period/2; // Hardware pin E5
-	TCE0_CCC = 1*period/2; // Hardware pin E2
-	TCE0_CCD = FWD_B*period/2; // Hardware pin E3
+	TCE0_CCA = FWD_A*compare; // Hardware pin E4
+	TCE0_CCB = BCK_A*compare; // Hardware pin E5
+	TCE0_CCC = BCK_B*compare; // Hardware pin E2
+	TCE0_CCD = FWD_B*compare; // Hardware pin E3
 }
 
 //run function
@@ -40,7 +40,7 @@ void task_Motor::run(void)
 	compare = 0;				//start at 0 power
 	effort = 0x7F;
 	FWD = 0;					//start at 0 movement
-	BCK = 1;
+	BCK = 0;
 	RHT = 0;
 	LFT = 0;
 	
@@ -66,19 +66,18 @@ void task_Motor::run(void)
 	//!!!----  RUN  ----!!!
 	while(1)
 	{
-		/*FWD = commForward->get();
-		BCK = commForward->get();
-		LFT = commForward->get();
+		FWD = commForward->get();
+		BCK = commBackward->get();
+		LFT = commLeft->get();
 		RHT = commRight->get();
-		effort = commEffort->get();*/
+		//effort = commEffort->get();
 		
 		((LFT^RHT)&(!FWD+BCK))?transition_to(PIVOT):(void)0;    // pivot	(Left XOR Right) AND NOT (Forward OR Back)
 		((LFT^RHT)&(FWD^BCK))?transition_to(TURN):(void)0;		// turn		(Left XOR Right) AND (Forward XOR Back)
 		((FWD^BCK)&(!(LFT+RHT)))?transition_to(STRAIGHT):(void)0;	// straight (Forward XOR Back) AND NOT (Left OR Right)
-		!(FWD+BCK+LFT+RHT)?transition_to(IDLE):(void)0;			// idle
-		//compare = effort*period/0xFFFF;
-		compare = period/2;
-		
+		!(FWD+BCK+LFT+RHT)?transition_to(IDLE):(void)0;			// idle		
+
+		compare = effort*period/0xFF;
 
 		switch(state)
 		{

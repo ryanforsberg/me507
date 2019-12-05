@@ -90,14 +90,15 @@ int main (void)
 	
 	// The user interface is at low priority; it could have been run in the idle task
 	// but it is desired to exercise the RTOS more thoroughly in this test program
-	new task_user ("UserInt", task_priority (0), 260, &ser_dev);
+	//new task_user ("UserInt", task_priority (0), 260, &ser_dev);
 	
 	// The LED blinking task is also low priority and is used to test the timing accuracy
 	// of the task transitions.
 	// new task_LED ("LED BLINKER", task_priority (1), 260, &ser_dev);
 	
-	new task_Motor("MOTORS", task_priority (2), 500, &ser_dev);
-	//new task_mastermind("Mastermind", task_priority(1), 500, &ser_dev);
+	task_Motor* MOTORS = new task_Motor("MOTORS", task_priority (2), 500, &ser_dev);
+	
+	new task_mastermind("Mastermind", task_priority(2), 500, &ser_dev);
 	//new EdgeSensor("Edge", task_priority(2), 500, &ser_dev);
 	
 	// Enable high - low level interrupts and enable global interrupts
