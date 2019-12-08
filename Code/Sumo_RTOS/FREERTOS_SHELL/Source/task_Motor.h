@@ -5,19 +5,10 @@
  * @details The task_Motor class sets up the XMEGA PWM for 1kHz operation on each of the four motor driver channels. 
  *			Each motor driver will be driven at the same duty cycle. Based on the four input booleans and one uint8_t,
  *			the task will set the outputs according to the following truth table. NOTE! Back Left is interpreted as
- *			turning to FACE left, which will result in the chassis moving to the RIGHT.
- *
- *			Inputs				Direction				Outputs
- *			FWD BCK LFT RHT							FWD_A	BCK_A	FWD_B	BCK_B
- *			1	0	0	0		Forward					1		0		1		0
- *			0	1	0	0		Backward				0		1		0		1
- *			0	0	1	0		Pivot Left				0		1		1		0
- *			0	0	0	1		Pivot Right				1		0		0		1
- *			1	0	1	0		Left Forward Turn		0		0		1		0
- *			1	0	0	1		Right Forward Turn		1		0		0		0
- *			0	1	1	0		Left Backward Turn		0		0		0		1
- *			0	1	0	1		Right Backward Turn		0		1		0		0
- *		
+ *			turning to FACE left, which will result in the chassis moving to the RIGHT. PS - I can't get Doxygen tables
+ *			to work, please see the source code.
+ *	
+ *	
  *		Revisions:
  *		\li 12-07-2019 PDH Too many revisions to count due to accelerated development cycle. This is at least
  *		the second full rewrite.
@@ -26,6 +17,21 @@
  *		HA! Have fun with it. No warranty of any kind. It might chop your fingers off. This is a "Do not dumb" zone,
  *		so don't dumb here.
  */
+
+/*
+ *			Inputs			||||	Direction		|		Outputs					||||
+ *			--------------------|-------------------|---------------------------------|
+ *			FWD |BCK|LFT| RHT	|					|	FWD_A|	BCK_A|	FWD_B|	BCK_B|
+ *			1	|0	|0	|0		|Forward			|		1|		0|		1|		0|
+ *			0	|1	|0	|0		|Backward			|		0|		1|		0|		1|
+ *			0	|0	|1	|0		|Pivot Left			|		0|		1|		1|		0|
+ *			0	|0	|0	|1		|Pivot Right		|		1|		0|		0|		1|
+ *			1	|0	|1	|0		|Left Forward Turn	|		0|		0|		1|		0|
+ *			1	|0	|0	|1		|Right Forward Turn	|		1|		0|		0|		0|
+ *			0	|1	|1	|0		|Left Backward Turn	|		0|		0|		0|		1|
+ *			0	|1	|0	|1		|Right Backward Turn|		0|		1|		0|		0|
+ */
+ 
 //***********************************
 /*
 * Created: 12/4/2019 9:09:17 AM
@@ -114,6 +120,7 @@ class task_Motor : public frt_task
 			PIVOT,
 			TURN
 		};
+		
 	//functions
 	public:
 		/** @brief		task_Motor constructor. Just needs to be passed the frt_task constructor arguments.
@@ -132,15 +139,15 @@ class task_Motor : public frt_task
 		 *				heard from it since.
 		 */
 		void run(void);
-	private:
 	
+	private:
 		/** @brief		Internal function which sets the compare registers to the appropriate values.
 		 *	@details	The set_outputs function is called by various states of the run function. It's five inputs
 		 *				are four booleans controlling the various compare and capture channels, and an effort which
 		 *				is universally applied to all of the channels. 
 		 *	@returns	Nothing is returned by this function.
 		 */
-		void set_outputs(bool, bool, bool, bool, uint8_t)
+		void set_outputs(bool, bool, bool, bool, uint8_t);
 
 };
 
