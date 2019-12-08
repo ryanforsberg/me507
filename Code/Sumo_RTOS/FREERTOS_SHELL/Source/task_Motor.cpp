@@ -25,7 +25,7 @@ task_Motor::task_Motor(const char* a_name,
 	
 } //MotorDriver
 
-void set_outputs(bool FWD_A, bool FWD_B, bool BCK_A, bool BCK_B,uint16_t compare)
+void set_outputs(bool FWD_A, bool FWD_B, bool BCK_A, bool BCK_B, uint16_t compare)
 {
 	TCE0_CCA = FWD_A*compare; // Hardware pin E4
 	TCE0_CCB = BCK_A*compare; // Hardware pin E5

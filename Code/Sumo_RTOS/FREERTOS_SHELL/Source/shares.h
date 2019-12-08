@@ -7,6 +7,7 @@
  *    \li 09-30-2012 JRR Original file was a one-file demonstration with two tasks
  *    \li 10-05-2012 JRR Split into multiple files, one for each task plus a main one
  *    \li 10-29-2012 JRR Reorganized with global queue and shared data references
+ *	  \li 12-07-2019 PDH Added the inter-task communication variables for the 507 bot.
  *
  *  License:
  *		This file is copyright 2012 by JR Ridgely and released under the Lesser GNU 
@@ -42,13 +43,49 @@
  */
 extern frt_text_queue print_ser_queue;			// This queue allows tasks to send characters to the user interface task for display.
 
-
+/**
+ *	@var		commForward
+ *	@brief		Used in combination with the other comm__ variables to command the task_Motor task
+ *	@details	commForward is used to indicate some type of forward motion - either pure translation,
+ *				or a forward turn (in combination with commLeft or commRight).
+ */
 extern shared_data<bool>* commForward;
+
+/**
+ *	@var		commBackward
+ *	@brief		Used in combination with the other comm__ variables to command the task_Motor task
+ *	@details	commBackward is used to indicate some type of backward motion - either pure translation,
+ *				or a backward turn (in combination with commLeft or commRight).
+ */
 extern shared_data<bool>* commBackward;
+
+/**
+ *	@var		commLeft
+ *	@brief		Used in combination with the other comm__ variables to command the task_Motor task
+ *	@details	commLeft is used to indicate some type of left turn - either pure rotation,
+ *				or a left-facing turn (in combination with commForward or commBackward).
+ */
 extern shared_data<bool>* commLeft;
+
+/**
+ *	@var		commRight
+ *	@brief		Used in combination with the other comm__ variables to command the task_Motor task
+ *	@details	commRight is used to indicate some type of right turn - either pure rotation,
+ *				or a right-facing turn (in combination with commForward or commBackward).
+ */
 extern shared_data<bool>* commRight;
+
+/**
+ *	@var		commEffort
+ *	@brief		Used in combination with the other comm__ variables to command the task_Motor task
+ *	@details	commEffort is used to indicate the duty cycle requested of the motor driver.
+ */
 extern shared_data<uint8_t>* commEffort;
 
+/**
+ *	@var		edge_out
+ *	@brief		Bitwise communication of which of the 6 edge sensors is currently seeing white.
+ */
 extern shared_data<uint8_t>* edge_out;
 
 #endif // _SHARES_H_
