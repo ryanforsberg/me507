@@ -1,20 +1,42 @@
-﻿/*
- * EdgeSensor.cpp
- *
- * Created: 11/17/2019 2:37:51 PM
- * Author : Ryan Forsberg
- */ 
+﻿/*********
+* @file		EdgeSensor_Digital.cpp
+* @brief	The .cpp file for the Edge Detection task.
+* @details	This file contains the two functions needed for the Edge Detection task. They are:
+*			\li constructor function - passes the needed parameters to the constructor of the
+*			base class.
+*			\li Run function - called by the scheduler. Contains an initial setup and then
+*			an infinite loop.
+*
+*  @date 2019-12-2 RRF Original file: Header file include and constructor setup. New file created when switching from analog to digital input
+*  @date 2019-12-3 RRF MCU pin setup
+*  @date 2019-12-4 RRF Correctly read each sensor and adjust share value accordingly
+*
+*	License:
+*	You can have the header file, but this file is licensed only under an hourly rental.
+*	The fee is $1000/hour plus 10% of any profits made. How else am I supposed to get through
+*	writing all of this documentation?
+*
+* Created: 12/2/2019 10:42:35 AM
+* Author: Ryan Forsberg
+*/
+
+/**	@brief		Detects the edge of the sumo ring using Pololu QTR IR sensors
+ *	@details	Sets up sensors by turning on LED emitters, sets up input pins to read sensor output signals, and adjusts share value accordingly when an edge is detected
+ */
+//*****************************************************************************
 
 
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/wdt.h>                        // Watchdog timer header
 
-#include "shared_data_sender.h"
+#include "shared_data_sender.h"				// Set up Shares
 #include "shared_data_receiver.h"
-#include "EdgeSensor_Digital.h"
+#include "EdgeSensor_Digital.h"				// Header File
 #define F_CPU 32000000UL  // needed for accurate Task Delay
 
+//-------------------------------------------------------------------------------------
+// Constructor
 EdgeSensor::EdgeSensor(const char* a_name,
 						unsigned portBASE_TYPE a_priority,
 						size_t a_stack_size,
@@ -25,7 +47,8 @@ EdgeSensor::EdgeSensor(const char* a_name,
 	
 	} 
 
-
+//-------------------------------------------------------------------------------------
+// Run function: consists of pin setup and infinite loop of read sensor output signals
 void EdgeSensor::run(void)
 {	
 	PORTC_DIRSET = PIN0_bm;	  // Edge CTRL: Pin C0. Set CTRL as output
@@ -66,13 +89,6 @@ void EdgeSensor::run(void)
 		{
 			edge_out->put(edge_out->get() | (1<<5));  // 00100000
 		}
-		
-		/* 
-		if ((PORTA_IN & (PIN2_bm | PIN3_bm | PIN4_bm | PIN5_bm | PIN6_bm | PIN7_bm)))  // If no edge detected
-		{
-
-		}
-		*/
 		
 		vTaskDelay(1); // Delay task 1ms
 	} 

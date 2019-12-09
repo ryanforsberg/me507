@@ -1,21 +1,34 @@
-/* 
-* mastermind.cpp
-*
+//***********************************
+/** @file	task_mastermind.cpp
+ *	@brief	C++ file for the Mastermind task.
+ * @details The Mastermind task controls the motion strategy of the sumo bot in ME 507. Based on sensor inputs, mastermind determined which direction to move.
+ *
+ *  @date 2019-12-4 RRF Initial file creation, edge detection strategy written, tested, and debugged.
+ *		
+ *		License:
+ *		If you're reading this, you're already breaking the licensing agreement.
+ */
+ 
+//***********************************
+/*
 * Created: 12/4/2019 10:34:10 AM
-* Author: Phil
+* Author: Ryan Forsberg
 */
 
-#define startdelay 5000
-#define rundelay 500
+/**	@brief		Strategizes sumo bot movement based on collected sensor information
+ *	@details	Reads shared information from the edge detection task. Depending on the combination of sensors that are detecting the edge, a corresponding motion function is executed
+ */
+//*****************************************************************************
 
 #include <avr/io.h>                         // Port I/O for SFR's
 #include <avr/wdt.h>                        // Watchdog timer header
 
-#include "shared_data_sender.h"
+#include "shared_data_sender.h"			// Headers for proper share functionality
 #include "shared_data_receiver.h"
-#include "task_mastermind.h"
+#include "task_mastermind.h"			// Mastermind header file
 
-// default constructor
+//-------------------------------------------------------------------------------------
+// Constructor
 task_mastermind::task_mastermind(const char* a_name,
 						unsigned portBASE_TYPE a_priority,
 						size_t a_stack_size,
@@ -24,13 +37,17 @@ task_mastermind::task_mastermind(const char* a_name,
 	: frt_task (a_name, a_priority, a_stack_size, p_ser_dev)
 {
 
-} //mastermind
+} 
 
+//-------------------------------------------------------------------------------------
+
+// Run: Determine which edge sensors are detecting the edge, and choose a corresponding logical strategy i.e. Move backwards if both front sensors are detecting the edge
 void task_mastermind::run(void)
 {
 	
 	// Edge detection sensor bit masks. Each sensor has a corresponding bit in edge_out->get()
 	// edge_out->get()= 00	F		E		D		C		B		A
+	
 	uint8_t LR_bm = 1;		// Edge Sensor A is Left Rear
 	uint8_t RR_bm = 1<<1;	// Edge Sensor B is Right Rear
 	uint8_t RM_bm = 1<<2;	// Edge Sensor C is Right Middle
@@ -39,12 +56,12 @@ void task_mastermind::run(void)
 	uint8_t LM_bm = 1<<5;	// Edge Sensor F is Left Middle
 
 	// Status of each edge detection sensor
-	uint8_t LF = 0;
-	uint8_t RF = 0;
-	uint8_t LM = 0;
-	uint8_t RM = 0;
-	uint8_t LR = 0;
-	uint8_t RR = 0;
+	uint8_t LF = 0;  // Left Front
+	uint8_t RF = 0;  // Right Front
+	uint8_t LM = 0;  // Left Middle
+	uint8_t RM = 0;  // Right Middle
+	uint8_t LR = 0;  // Left Rear
+	uint8_t RR = 0;  // Right Rear
 	
 	while(1)	// Forever
 	{
@@ -146,7 +163,7 @@ void task_mastermind::run(void)
 		
 		else
 		{
-			task_mastermind::Forward(); // Strategy when no edge detected
+			task_mastermind::Forward(); // Strategy when no edge detected. If more time available, opponent detection and navigation inputs would affect this strategy.
 		}
 		
 		vTaskDelay(5); // Delay task 5ms
@@ -155,6 +172,22 @@ void task_mastermind::run(void)
 }
 
 // Functions below adjust shares to proper values based on desired motion
+
+/*
+ Truth Table for Mastermind Strategizing:
+ *	Inputs			Direction			
+ *	FWD	BCK	LFT	RHT						
+ *	1	0	0	0	Forward				
+ *	0	1	0	0	Backward			
+ *	0	0	1	0	Pivot Left			
+ *	0	0	0	1	Pivot Right			
+ *	1	0	1	0	Left Forward Turn	
+ *	1	0	0	1	Right Forward Turn	
+ *	0	1	1	0	Left Backward Turn	
+ *	0	1	0	1	Right Backward Turn	
+ *
+*/ 
+
 void task_mastermind::Forward(void)
 {
 	commBackward->put(0);
@@ -203,7 +236,7 @@ void task_mastermind::Right_Forward(void)
 	commRight->put(1);
 }
 
-void task_mastermind::Left_Backward(void)	// Note: For backward turning motion, right/left is switched due to a difference in interpretation during backward motion 
+void task_mastermind::Left_Backward(void)	// Note: For backward turning motion, right/left is switched due to a difference in interpretation between team members during backward motion 
 {											
 	commBackward->put(1);
 	commForward->put(0);
@@ -218,19 +251,3 @@ void task_mastermind::Right_Backward(void)
 	commLeft->put(1);
 	commRight->put(0);
 }
-
-/*
-
- Truth Table for Motor Task:
- *	Inputs			Direction			Outputs
- *	FWD	BCK	LFT	RHT						FWD_A	BCK_A	FWD_B	BCK_B
- *	1	0	0	0	Forward				1		0		1		0
- *	0	1	0	0	Backward			0		1		0		1
- *	0	0	1	0	Pivot Left			0		1		1		0
- *	0	0	0	1	Pivot Right			1		0		0		1
- *	1	0	1	0	Left Forward Turn	0		0		1		0
- *	1	0	0	1	Right Forward Turn	1		0		0		0
- *	0	1	1	0	Left Backward Turn	0		0		0		1
- *	0	1	0	1	Right Backward Turn	0		1		0		0
- *
-*/ 
