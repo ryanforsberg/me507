@@ -42,6 +42,7 @@
 //-----------------------------------------
 /** @brief		Edge Detection class used to read the sensors for the 507 Sumobot. Uses inter-task communication variable: edge_out.
  *	@details	This class controls the edge detection sensors: Their setup, reading, and interpretation. 
+ 
  */
 
 class EdgeSensor : public frt_task

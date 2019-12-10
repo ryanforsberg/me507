@@ -20,9 +20,7 @@
 * Author: Ryan Forsberg
 */
 
-/**	@brief		Detects the edge of the sumo ring using Pololu QTR IR sensors
- *	@details	Sets up sensors by turning on LED emitters, sets up input pins to read sensor output signals, and adjusts share value accordingly when an edge is detected
- */
+
 //*****************************************************************************
 
 
@@ -36,6 +34,7 @@
 #define F_CPU 32000000UL  // needed for accurate Task Delay
 
 //-------------------------------------------------------------------------------------
+
 // Constructor
 EdgeSensor::EdgeSensor(const char* a_name,
 						unsigned portBASE_TYPE a_priority,
@@ -49,6 +48,9 @@ EdgeSensor::EdgeSensor(const char* a_name,
 
 //-------------------------------------------------------------------------------------
 // Run function: consists of pin setup and infinite loop of read sensor output signals
+/**	@brief		Detects the edge of the sumo ring using Pololu QTR IR sensors
+ *	@details	Sets up sensors by turning on LED emitters, sets up input pins to read sensor output signals, and adjusts share value accordingly when an edge is detected
+ */
 void EdgeSensor::run(void)
 {	
 	PORTC_DIRSET = PIN0_bm;	  // Edge CTRL: Pin C0. Set CTRL as output

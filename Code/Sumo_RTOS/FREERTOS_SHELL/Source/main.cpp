@@ -10,6 +10,24 @@
  *    This file is released under the Lesser GNU Public License, version 2. This 
  *    program is intended for educational use only, but it is not limited thereto. 
  */
+/**	\mainpage
+ * 	This is the Doxygen home page for the DuoSumo SumoBot created for ME 507 - Mechanical
+ *	Control System Design for the Fall semester of 2019. These pages document the software
+ *	used to control the robot. The control system is designed around a FreeRTOS implementation
+ *	provided by Charlie Refvem (which itself was based on work by Dr. John Ridgely). It
+ *	implements three object-orienteted tasks in a real time operating system with inter-task
+ *	communication and uses several features of the Atmel XMega to reduce load on the main
+ *	microprocessor.
+ *
+ *	\section Bugs
+ *	Initial testing showed functional software, but an issue with the 3.3V supply prevented
+ *	complete testing of the system.
+ *	\section Authors
+ *	\li Philippe Habets
+ *	\li Ryan Forsberg
+ *	
+ *
+ */
 //*************************************************************************************
 
 
@@ -35,7 +53,6 @@
 #include "xmega_util.h"
 
 #include "task_user.h"                      // Header for user interface task
-#include "task_LED.h"                      // Header for user interface task
 
 #include "task_Motor.h"
 #include "task_mastermind.h"
